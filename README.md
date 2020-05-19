@@ -1,4 +1,5 @@
 # ADRM
+ADRM - automatized data retrieval for microgrid and Water-Energy-Food polyservice system design
 
 The purpose of the tool is the automatization of location-specific data retrieval for providing the input for site-tailored configuration of microgrids and water-energy-food polyservice systems. The information required for the system optimization is point-based (coordinates).
 
