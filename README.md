@@ -1,3 +1,17 @@
+# ADRM
+
+The purpose of the tool is the automatization of location-specific data retrieval for providing the input for site-tailored configuration of microgrids and water-energy-food polyservice systems. The information required for the system optimization is point-based (coordinates).
+
+This repository is generated from rli_template. More information see below. 
+
+## Overview
+
+An Overview of input parameters including required temporal and spatial resolution, potential data sources and API can be found in the excel below: 
+
+https://onedrive.live.com/edit.aspx?resid=E1A557B54DE5DB63!116323&ithint=file%2cxlsx&authkey=!ACgLcuhy9j-bfZg
+
+Feel free to update this excel by further parameters and data sources including their API. 
+
 # rli_template
 Template repository for creating new projects under the RLI's umbrella
 
