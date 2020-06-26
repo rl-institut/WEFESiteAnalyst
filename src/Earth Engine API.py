@@ -7,6 +7,14 @@ To get the most recent image from Image Collection: .sort('system:time_start', F
 To get the median value of all the selected layers: collection.reduce(ee.Reducer.median())
 To select only the wanted layer: .select('name_of_layer'). The name_of_layer is reported in the website, and corresponds
  to the band name of the dataset
+
+ #####For installation#######
+In the terminal:
+ #install the package
+conda install -c conda-forge earthengine-api
+ #authenticate
+earthengine authenticate
+
 '''
 import ee
 import geopandas as gpd
