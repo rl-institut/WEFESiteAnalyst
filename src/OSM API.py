@@ -69,15 +69,19 @@ plt.axis('equal')
 plt.show()
 
 
-
+#download power lines ####
+# https://wiki.openstreetmap.org/wiki/Power
+# https://towardsdatascience.com/loading-data-from-openstreetmap-with-python-and-the-overpass-api-513882a27fd0
+# https://openinframap.org/#2/26/12 where data are rendered
 
 from pandas.io.json import json_normalize
 overpass_query = """
 [out:json];
+[bbox:50.6,7.0,50.8,7.3];
 (
- way["power"="line"](6.7499552751, 36.619987291, 18.4802470232, 47.1153931748);
-  way["power"="cable"](6.7499552751, 36.619987291, 18.4802470232, 47.1153931748);
-  way["power"="minor_line"](6.7499552751, 36.619987291, 18.4802470232, 47.1153931748);
+ way["power"="line"];
+  way["power"="cable"];
+  way["power"="minor_line"];
 );
 out geom;
 """
