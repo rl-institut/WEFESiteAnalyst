@@ -9,7 +9,7 @@ This repository is generated from rli_template. More information see below.
 
 An Overview of input parameters including required temporal and spatial resolution, potential data sources and API can be found in the excel below: 
 
-https://1drv.ms/x/s!AmPb5U21V6Xhh45CSKJnspwn7iqU2A?e=cCJkO8
+https://1drv.ms/x/s!AmPb5U21V6Xhh_Bv73yK-dlfHm8xXw?e=lg1egk
 
 Feel free to update this excel by further parameters and data sources including their API. 
 
