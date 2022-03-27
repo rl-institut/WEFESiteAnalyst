@@ -1,7 +1,7 @@
 # WEEF Site Analyst
-automatized data retrieval for the configuration of integrated Water-Eco-Energy-Food systems
+automatized data retrieval for the configuration of integrated Water-Energy-Food-Envrionment systems (iWEFEs).
 
-The purpose of the tool is the automatization of location-specific data retrieval for providing the input for site-tailored configuration of microgrids and water-energy-food polyservice systems. The information required for the system optimization is point-based (coordinates).
+The purpose of the tool is the automatization of location-specific data retrieval for providing the input for site-tailored configuration of microgrids and iWEFEs. The information required for the system optimization is point-based (coordinates).
 
 This repository is generated from rli_template. More information see below. 
 
