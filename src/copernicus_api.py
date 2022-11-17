@@ -1,6 +1,6 @@
 import cdsapi
 
-c = cdsapi.Client()
+c = cdsapi.client()
 
 c.retrieve(
     'cams-solar-radiation-timeseries',

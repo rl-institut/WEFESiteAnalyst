@@ -1,48 +1,39 @@
-Latitude = 9.830153
-Longitude = -83.616358
+import os
+# download era5 data climate data
 
-import cdsapi
+os.chdir("../src/")
+import era5
+os.chdir("../examples/")
 
-c = cdsapi.Client
 
-c.retrieve(
-    'reanalysis-era5-land',
-    {
-        'format': 'grib',
-        'variable': 'potential_evaporation',
-        'year': '2019',
-        'month': [
-            '01', '02', '03',
-            '04', '05', '06',
-            '07', '08', '09',
-            '10', '11', '12',
-        ],
-        'day': [
-            '01', '02', '03',
-            '04', '05', '06',
-            '07', '08', '09',
-            '10', '11', '12',
-            '13', '14', '15',
-            '16', '17', '18',
-            '19', '20', '21',
-            '22', '23', '24',
-            '25', '26', '27',
-            '28', '29', '30',
-            '31',
-        ],
-        'time': [
-            '00:00', '01:00', '02:00',
-            '03:00', '04:00', '05:00',
-            '06:00', '07:00', '08:00',
-            '09:00', '10:00', '11:00',
-            '12:00', '13:00', '14:00',
-            '15:00', '16:00', '17:00',
-            '18:00', '19:00', '20:00',
-            '21:00', '22:00', '23:00',
-        ],
-        'area': [
-            10, 83, 9,
-            84,
-        ],
-    },
-    'download.grib')
+# ERA5
+# enter coordinates
+latitude = 9.830153
+longitude = -83.616358
+
+# set start and end date (end date will be included
+# in the time period for which data is downloaded)
+start_date, end_date = '2017-12-31', '2018-12-31'  # time in UTC choose start date one day before time of interest
+# for position east of 0° meridian for covering all hours of interest
+
+# set variable set to download
+
+variable = "pvlib"
+target_file = 'ERA5_pvlib_2018.nc'
+
+ds = era5.get_era5_data_from_datespan_and_position(
+    variable=variable,
+    start_date=start_date, end_date=end_date,
+    latitude=latitude, longitude=longitude,
+    target_file=target_file)
+
+
+# plot irradiance
+# import matplotlib.pyplot as plt
+# weather_df.loc[:, ['BHI', 'DHI']].plot(title='Irradiance')
+# plt.xlabel('Time')
+# plt.ylabel('Irradiance in $W/m^2$')
+
+# Alternative: Load existing existing climate data file
+# import pandas as pd
+# solar_hegelbach = pd.read_csv(r"apv_hegelbach_raw.csv")
