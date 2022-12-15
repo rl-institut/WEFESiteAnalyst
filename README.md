@@ -10,9 +10,16 @@ This repository is generated from rli_template. More information see below.
 An Overview of input parameters including required temporal and spatial resolution, potential data sources and API can be found in the excel below: 
 
 https://1drv.ms/x/s!AmPb5U21V6Xhh_Bv73yK-dlfHm8xXw?e=lg1egk
-
 Feel free to update this excel by further parameters and data sources including their API. 
 
+## Installation
+
+The currently supported Python Version is 3.8.10. For using OWEFE clone the repository to your local machine. Then create a new virtual environment with Python Version 3.9. Activate the new virtual environment and move to the repository folder to install the requirements of WEFESiteAnalyst
+
+     pip install -r requirements.txt
+
+## Get started
+... under development...
 # rli_template
 Template repository for creating new projects under the RLI's umbrella
 
