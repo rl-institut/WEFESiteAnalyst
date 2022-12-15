@@ -48,12 +48,15 @@ def get_era5_data_from_datespan_and_position(
     Returns
     -------
     CDS data in an xarray format : xarray
+    variable names in era5: https://confluence.ecmwf.int/display/CKB/ERA5%3A+data+documentation
     """
 
     if variable == "pvlib":
         variable = ["fdir", "ssrd", "2t", "10u", "10v"]
     elif variable == "windpowerlib":
         variable = ["100u", "100v", "10u", "10v", "2t", "fsr", "sp"]
+    elif variable == "wefesiteanalyst":
+         variable = ["ssrd", "2t", "10u", "10v", "e", "tp"]
     elif variable == "feedinlib":
         variable = [
             "100u",

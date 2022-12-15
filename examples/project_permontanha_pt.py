@@ -8,8 +8,8 @@ os.chdir("../examples/")
 
 # ERA5
 # enter coordinates
-latitude = 9.830153
-longitude = -83.616358
+latitude = 37.134986
+longitude = -8.853894
 
 # set start and end date (end date will be included
 # in the time period for which data is downloaded)

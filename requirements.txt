@@ -2,3 +2,5 @@ cdsapi
 numpy
 xarray
 geopandas
+netcdf4
+scipy

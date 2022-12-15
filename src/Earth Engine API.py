@@ -18,8 +18,13 @@ earthengine authenticate
 '''
 import ee
 import geopandas as gpd
-from Functions import download_url
+#from Functions import download_url
 
+# Trigger the authentication flow.
+ee.Authenticate()
+
+# Initialize the library.
+ee.Initialize()
 
 ##### Import layer with region boundaries and extract its extent#####
 Area=gpd.read_file('Input/Namajavira_4326.shp')
@@ -38,7 +43,9 @@ path = image.getDownloadUrl({
 })
 print(path)
 
-download_url(path,'Output\Elevation.zip')
+# download_url(path,'Output\Elevation.zip')
+# ideally I do not want to download but just to print into report
+
 
 ###########   Land cover ############
 #Copernicus Global Land Cover Layers: CGLS-LC100 collection 2. 100m resolution. Ref year 2015
@@ -76,7 +83,43 @@ path = image.getDownloadUrl({
     'region': [[minx, miny], [minx, maxy], [maxx, miny], [maxx, maxy]]
 })
 print(path)
-download_url(path,'Output\LandCover.zip')
+# download_url(path,'Output\LandCover.zip')
+
+
+#selected LandUuse: Copernicus Global Land Cover Layers: CGLS-LC100 Collection
+
+landuse = ee.ImageCollection("COPERNICUS/Landcover/100m/Proba-V-C3/Global")
+
+# NDVI: LANDSAT_LC08_C01_T1_8DAY_NDVI *
+var dataset = ee.ImageCollection('LANDSAT/LC08/C01/T1_8DAY_NDVI')
+                  .filterDate('2019-01-01', '2019-12-31');
+var colorized = dataset.select('NDVI');
+var colorizedVis = {
+  min: 0.0,
+  max: 1.0,
+  palette: [
+    'FFFFFF', 'CE7E45', 'DF923D', 'F1B555', 'FCD163', '99B718', '74A901',
+    '66A000', '529400', '3E8601', '207401', '056201', '004C00', '023B01',
+    '012E01', '011D01', '011301'
+  ],
+};
+Map.setCenter(-8.853894, 37.134986, 14);
+Map.addLayer(colorized, colorizedVis, 'Colorized');
+
+
+# protected area WDPA
+#var dataset = ee.FeatureCollection('WCMC/WDPA/current/polygons');
+#var visParams =
+#  palette: ['2ed033', '5aff05', '67b9ff', '5844ff', '0a7618', '2c05ff'],
+#  min: 0.0,
+#  max: 1550000.0,
+#  opacity: 0.8,
+#};
+#var image = ee.Image().float().paint(dataset, 'REP_AREA');
+#Map.setCenter(41.104, -17.724, 6);
+#Map.addLayer(image, visParams, 'WCMC/WDPA/current/polygons');
+#Map.addLayer(dataset, null, 'for Inspector', false);
+
 ######## Climatic variables #############
 #TerraClimate: Monthly Climate and Climatic Water Balance for Global Terrestrial Surfaces, University of Idaho. res 2.5 arcmin
 
