@@ -2,7 +2,6 @@ import requests
 from pprint import pprint
 
 # API KEY
-API_key = "9cddbbca1be9c649a31f575746aa221f"
 
 # This stores the url relief
 base_url = "http://maps.openweathermap.org/maps/2.0/relief/"
