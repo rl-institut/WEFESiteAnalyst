@@ -14,7 +14,7 @@ Feel free to update this excel by further parameters and data sources including 
 
 ## Installation
 
-The currently supported Python Version is 3.8.10. For using OWEFE clone the repository to your local machine. Then create a new virtual environment with Python Version 3.9. Activate the new virtual environment and move to the repository folder to install the requirements of WEFESiteAnalyst
+The currently supported Python Version is 3.9. For using OWEFE clone the repository to your local machine. Then create a new virtual environment with Python Version 3.9. Activate the new virtual environment and move to the repository folder to install the requirements of WEFESiteAnalyst
 
      pip install -r requirements.txt
 
