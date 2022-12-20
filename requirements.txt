@@ -4,3 +4,7 @@ xarray
 geopandas
 netcdf4
 scipy
+jupyter
+earthengine-api
+matplotlib
+folium
