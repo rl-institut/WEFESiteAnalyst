@@ -8,3 +8,4 @@ jupyter
 earthengine-api
 matplotlib
 folium
+geemap
