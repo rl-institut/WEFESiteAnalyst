@@ -25,16 +25,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9fb520b-0171-4c5e-9970-c97a4b02cb25" name="Default Changelist" comment="New file created">
-      <change afterPath="$PROJECT_DIR$/examples/ERA5_nc_to_pvlib_csv.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/ERA5_pvlib_2018.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/ERA5_pvlib_2018.nc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/relief_map.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ADRM.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ADRM.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/Finca_Felicia_CR.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/Finca_Felicia_CR.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Earth Engine API.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Earth Engine API.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/era5.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/era5.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/Costa Rica/.ipynb_checkpoints/WEFESiteAnalyst_Costa Rica-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/Costa Rica/.ipynb_checkpoints/WEFESiteAnalyst_Costa Rica-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/Costa Rica/WEFESiteAnalyst_Costa Rica.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/Costa Rica/WEFESiteAnalyst_Costa Rica.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/Portugal/.ipynb_checkpoints/WEFESiteAnalyst_Portugal-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/Portugal/.ipynb_checkpoints/WEFESiteAnalyst_Portugal-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/Portugal/WEFESiteAnalyst_Portugal.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/Portugal/WEFESiteAnalyst_Portugal.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
