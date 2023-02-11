@@ -9,3 +9,4 @@ earthengine-api
 matplotlib
 folium
 geemap
+overpy
