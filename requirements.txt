@@ -10,3 +10,4 @@ matplotlib
 folium
 geemap
 overpy
+osmnx
