@@ -1,16 +1,9 @@
 # WEFE Site Analyst
-automatized retrieval of open data for the site-tailored planning of integrated Water-Energy-Food-Environment systems (iWEFEs).
+automatized retrieval of open data for the site-tailored planning of integrated Water-Energy-Food-Environment Systems (iWEFEs).
 
 The purpose of the tool is the automatization of location-specific data retrieval for providing the input for site-tailored planning and configuration of iWEFEs. The input to the WEFE Site Analyst are coordinates (point-based). Together with OWEFE and the iWEFE configurator, the WEFE Site Analyst contributes to the doctoral project "Facilitating the Planning of Integrated Water-Energy-Food-Environment Systems through Open Source Software".
 
 This repository is generated from rli_template. More information see below. 
-
-## Overview
-
-An Overview of input parameters including required temporal and spatial resolution, potential data sources and API can be found in the excel below: 
-
-https://1drv.ms/x/s!AmPb5U21V6Xhh_Bv73yK-dlfHm8xXw?e=lg1egk
-Feel free to update this excel by further parameters and data sources including their API. 
 
 ## Installation
 
