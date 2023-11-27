@@ -12,7 +12,7 @@ The currently supported Python Version is 3.9. For using the WEFESiteAnalyst clo
      pip install -r requirements.txt
 
 ## Get started
-### Environmental Data
+### Environmental data
 After installation you can use the WEFESiteAnalyst. Therefore you have to run an anaconda prompt on your computer, move to the WEFESiteAnalyst repository and type "jupyter notebook". The repository will open in an jupyter notebook. In the folder examples, you can see applications of the WEFESiteAnalyst for various locations. For analyzing a new location you can use [WEFESiteAnalyst/examples/generic/WEFESiteAnalyst.ipynb](https://github.com/JulianBarinton/WEFESiteAnalyst/tree/master/examples/generic/WEFESiteAnalyst.ipynb). Here you can try out the WEFESiteAnalyst for any location on the globe. For storing the retrieved data for a new specific location in your repository, you can create a new folder "WEFESiteAnalyst/example/<new_location>/". Move the WEFESiteAnalyst.ipynb file to the newly created folder and run it to analyze the location and download site-specific WEFE data.
 
 ### Socio-economic data
