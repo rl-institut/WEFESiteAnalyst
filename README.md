@@ -7,11 +7,16 @@ This repository is generated from rli_template. More information see below.
 
 ## Installation
 
+### software
 The currently supported Python Version is 3.9. For using the WEFESiteAnalyst clone the repository to your local machine. Then create a new virtual environment with Python Version 3.9. Activate the new virtual environment and move to the repository folder to install the requirements of WEFESiteAnalyst
 
      pip install -r requirements.txt
 
+### required accounts
+The WEFESiteAnalyst uses google earth engine and CDS API. Therefore, a Google Account and a Copernicus Climate Data Store Account are required. You can register for the Copernicus Climate Data Store [here](https://cds.climate.copernicus.eu/user/register). Instructions on how to use CDS API can be found [here](https://cds.climate.copernicus.eu/api-how-to).
+
 ## Get started
+
 ### Environmental data
 After installation you can use the WEFESiteAnalyst. Therefore you have to run an anaconda prompt on your computer, move to the WEFESiteAnalyst repository and type "jupyter notebook". The repository will open in an jupyter notebook. In the folder examples, you can see applications of the WEFESiteAnalyst for various locations. For analyzing a new location you can use [WEFESiteAnalyst/examples/generic/WEFESiteAnalyst.ipynb](https://github.com/JulianBarinton/WEFESiteAnalyst/tree/master/examples/generic/WEFESiteAnalyst.ipynb). Here you can try out the WEFESiteAnalyst for any location on the globe. For storing the retrieved data for a new specific location in your repository, you can create a new folder "WEFESiteAnalyst/example/<new_location>/". Move the WEFESiteAnalyst.ipynb file to the newly created folder and run it to analyze the location and download site-specific WEFE data.
 
