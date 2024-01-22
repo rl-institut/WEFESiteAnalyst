@@ -11,3 +11,4 @@ folium
 geemap
 overpy
 osmnx
+python-docx
