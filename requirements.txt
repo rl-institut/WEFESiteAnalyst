@@ -12,3 +12,4 @@ geemap
 overpy
 osmnx
 python-docx
+mss
