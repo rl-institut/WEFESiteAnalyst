@@ -17,11 +17,12 @@ The WEFESiteAnalyst uses google earth engine and CDS API. Therefore, a Google Ac
 
 ## Get started
 
-### Environmental data
+### Environmental data collection
 After installation you can use the WEFESiteAnalyst. Therefore you have to run an anaconda prompt on your computer, move to the WEFESiteAnalyst repository and type "jupyter notebook". The repository will open in an jupyter notebook. In the folder examples, you can see applications of the WEFESiteAnalyst for various locations. For analyzing a new location you can use [WEFESiteAnalyst/examples/generic/WEFESiteAnalyst.ipynb](https://github.com/JulianBarinton/WEFESiteAnalyst/tree/master/examples/generic/WEFESiteAnalyst.ipynb). Here you can try out the WEFESiteAnalyst for any location on the globe. For storing the retrieved data for a new specific location in your repository, you can create a new folder "WEFESiteAnalyst/example/<new_location>/". Move the WEFESiteAnalyst.ipynb file to the newly created folder and run it to analyze the location and download site-specific WEFE data.
 
-### Socio-economic data
-The WEFESiteAnalyst includes the collection of socio-economic data. Therefore, find a Survey xml-file in [WEFESiteAnalyst/surveyWEFESiteAnalyst_survey.xml](https://github.com/JulianBarinton/WEFESiteAnalyst/blob/master/survey/WEFESiteAnalyst_survey.xml). You can deploy the xml-file in kobotoolbox and fill it (in case you are analyzing a location you are working or living) or send it to people living or working at the location to be analyzed. The results are made available as table. For deployment of the xml-file in kobotoolbox, please see their [documentation](https://support.kobotoolbox.org/).
+### Socio-economic data collection and WEF demand assessment
+The WEFESiteAnalyst includes the collection of socio-economic data and WEF demand assessment. Therefore, find a Survey xml-file in [WEFESiteAnalyst/surveyWEFESiteAnalyst_survey.xml](https://github.com/JulianBarinton/WEFESiteAnalyst/blob/master/survey/WEFESiteAnalyst_survey.xml). You can deploy the xml-file in kobotoolbox and fill it (in case you are analyzing a location you are working or living) or send it to people living or working at the location to be analyzed. The results are made available as table. For deployment of the xml-file in kobotoolbox, please see their [documentation](https://support.kobotoolbox.org/). 
+The WEF demand assessment tool (WEF DAT) is implemented by adding the water and food dimension to the exisitng energy demand asssessment tool [RAMP](https://github.com/RAMP-project/RAMP). Inputs to the WEF DAT are the survey results. Outputs of the WEF DAT are hourly demand time series related to the water, energy, and food dimensions.
 
 # rli_template
 Template repository for creating new projects under the RLI's umbrella
