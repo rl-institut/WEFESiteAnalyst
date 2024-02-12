@@ -1,7 +1,7 @@
 soil_depth,soil organic carbon [dg/kg],bulk density [cg/cm³],cation exchange capacity at pH 7 [mmol(c)/kg],nitrogen content [cg/kg],pH of soil water [pH*10],clay content [g/kg],silt content [g/kg],sand content [g/kg],soil texture
-0-5cm,70,150,124,1064,81,222,368,222,Silt Loam
-100-200cm,23,148,126,408,81,315,340,315,Sandy Loam
-15-30cm,47,151,117,651,81,240,363,240,Silt Loam
-30-60cm,34,148,117,494,81,251,368,251,Silt Loam
-5-15cm,51,150,116,801,81,239,364,239,Silt Loam
-60-100cm,38,147,122,417,81,241,362,241,Silt Loam
+0-5cm,48,143,146,495,81,300,333,300,Sandy Loam
+100-200cm,24,141,137,454,81,299,343,299,Sandy Loam
+15-30cm,27,143,144,366,81,298,335,298,Sandy Loam
+30-60cm,19,144,139,328,80,306,330,306,Sandy Loam
+5-15cm,44,141,147,432,81,305,330,305,Sandy Loam
+60-100cm,20,145,137,364,81,310,326,310,Sandy Loam

@@ -28,20 +28,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9fb520b-0171-4c5e-9970-c97a4b02cb25" name="Default Changelist" comment="New file created">
-      <change afterPath="$PROJECT_DIR$/.ipynb_checkpoints/requirements-checkpoint.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/Colombia/.ipynb_checkpoints/WEFESiteAnalyst_Aiwa-report-checkpoint.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/Colombia/.ipynb_checkpoints/my_map-checkpoint.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/Colombia/WEFESiteAnalyst_Aiwa-report.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/Colombia/my_map.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/Colombia/wefe_site_analyst_Aiwa_Colombia.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/Colombia/wefesiteanalyst_aiwa_report.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ADRM.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ADRM.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/Colombia/WEFESiteAnalyst_Aiwa.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/Colombia/WEFESiteAnalyst_Aiwa.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/Colombia/era5_wefesiteanalyst_Aiwa.nc" beforeDir="false" afterPath="$PROJECT_DIR$/examples/Colombia/era5_wefesiteanalyst_Aiwa.nc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/generic/WEFESiteAnalyst.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/generic/WEFESiteAnalyst.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/generic/WEFESiteAnalyst-test.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/generic/WEFESiteAnalyst-test.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/generic/soil_properties_test case.csv" beforeDir="false" afterPath="$PROJECT_DIR$/examples/generic/soil_properties_test case.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,14 +58,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ciara.dunks/PycharmProjects/WEFESiteAnalyst&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/ciara.dunks/PycharmProjects/h2-pacific-islands",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Python.Earth Engine API">
     <configuration name="ERA5_nc_to_pvlib_csv" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ADRM" />
