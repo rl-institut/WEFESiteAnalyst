@@ -30,7 +30,10 @@
     <list default="true" id="f9fb520b-0171-4c5e-9970-c97a4b02cb25" name="Default Changelist" comment="New file created">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/generic/WEFESiteAnalyst-test.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/generic/WEFESiteAnalyst-test.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/generic/soil_properties_test case.csv" beforeDir="false" afterPath="$PROJECT_DIR$/examples/generic/soil_properties_test case.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/generic/terrain_map.tif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/generic/test_terrain_map.tif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/generic/wefe_site_analyst_test-case.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/generic/~$fe_site_analyst_test-case.docx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
