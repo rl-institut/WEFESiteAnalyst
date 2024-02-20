@@ -20,14 +20,16 @@ cooking_demand_dict = {
             'lunch':
                 {
                     'fuel': 'firewood',
+                    'fuel_amount': 0.3,
                     'cooking_window': [5, 7],  # usage window [start, end] in min of the day
-                    'cooking_time': 2*60,  # average duration of this meal preparation
+                    'cooking_time': 1.5,  # average duration of this meal preparation
                  },
             'dinner':
                 {
                     'fuel': 'firewood',
+                    'fuel_amount': 0.5,
                     'cooking_window': [18, 20],  # usage window [start, end] in min of the day
-                    'cooking_time': 2*60,  # average duration of this meal preparation
+                    'cooking_time': 2,  # average duration of this meal preparation
                  }
         }
     }
