@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -25,10 +28,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9fb520b-0171-4c5e-9970-c97a4b02cb25" name="Default Changelist" comment="New file created">
-      <change beforePath="$PROJECT_DIR$/examples/Costa Rica/.ipynb_checkpoints/WEFESiteAnalyst_Costa Rica-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/Costa Rica/.ipynb_checkpoints/WEFESiteAnalyst_Costa Rica-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/Costa Rica/WEFESiteAnalyst_Costa Rica.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/Costa Rica/WEFESiteAnalyst_Costa Rica.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/Portugal/.ipynb_checkpoints/WEFESiteAnalyst_Portugal-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/Portugal/.ipynb_checkpoints/WEFESiteAnalyst_Portugal-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/Portugal/WEFESiteAnalyst_Portugal.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/Portugal/WEFESiteAnalyst_Portugal.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/generic/WEFESiteAnalyst-test.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/generic/WEFESiteAnalyst-test.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/generic/terrain_map.tif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/generic/test_terrain_map.tif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/generic/wefe_site_analyst_test-case.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/generic/~$fe_site_analyst_test-case.docx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,11 +61,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Julian/PycharmProjects/OWEFE&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/ciara.dunks/PycharmProjects/h2-pacific-islands",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Python.Earth Engine API">
     <configuration name="ERA5_nc_to_pvlib_csv" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ADRM" />
