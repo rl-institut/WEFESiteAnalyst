@@ -13,3 +13,4 @@ overpy
 osmnx
 python-docx
 mss
+docx
