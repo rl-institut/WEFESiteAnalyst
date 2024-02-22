@@ -8,7 +8,7 @@ import ramp
 import pandas as pd
 import numpy as np
 import copy
-from  time import perf_counter
+from time import perf_counter
 
 
 #%% Read survey results from Kobo
@@ -126,8 +126,8 @@ admin_input = {
     }
 }
 
-#%%
-start= perf_counter()
+#%% Generate input for RAMP use case
+start = perf_counter()
 # Create dict to store generated RAMP user instances
 ramp_users_dict = {}
 # Loop through every household survey respondent.
@@ -142,8 +142,7 @@ for household_name, household_data in households_dict.items():
     for appliance_name, appliance_data in household_data['appliances'].items():  # Loop through user's appliances
 
         # Get appliance's metadata
-        # TODO consider merging appliance's metadata earlier into the household->appliances dict? Decide.
-        appliance_metadata = admin_input['appliance_metadata'][appliance_name]
+        appliance_metadata = admin_input['appliance_meta_data'][appliance_name]
 
         # Get appliance's usage windows
         # Definition of usage windows is extremely messy. Propose to RAMP core to define usage windows in list?
@@ -166,7 +165,7 @@ for household_name, household_data in households_dict.items():
 
             # Check if windows are given and set them
             # If no windows are specified,
-            num_windows = num_usage_windows,
+            num_windows=num_usage_windows,
             window_1=usage_windows[0],
             window_2=usage_windows[1],
             window_3=usage_windows[2],
