@@ -4,7 +4,7 @@ import ramp
 import pandas as pd
 import numpy as np
 import copy
-from  time import perf_counter
+from time import perf_counter
 
 # Define timeseries for which demand profiles will be generated
 days_nr = 3  # Number of days
@@ -17,8 +17,8 @@ days_timeseries = pd.date_range("2018-01-01", periods=days_nr, freq="D")
 cooking_demand_dict = {
     'low_income_hh': {
         'num_users': 20,
-        'months_present': [1, 2, 3, 4, 7, 8, 9, 10, 11, 12],
-        'working_days': [0, 1, 2, 3, 4, 5, 6],
+        'months_present': [1, 2, 3, 4, 7, 8, 9, 10, 11, 12],  # months at which this user is present in the settlement
+        'working_days': [0, 1, 2, 3, 4, 5, 6],  # days at which this user uses his appliances
         'cooking_demands': {
             'lunch':
                 {

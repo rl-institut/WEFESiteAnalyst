@@ -109,7 +109,7 @@ class RampControl:
         for month in range(1, 13):
             # Create dict to store generated RAMP user instances
             ramp_users_dict = {}
-            # Loop through every household survey respondent.
+            # Loop through every survey respondent.
             for user_name, user_data in cooking_input_data.items():
                 # Create user instance for this household survey respondent
                 new_user = ramp.User(
@@ -187,3 +187,76 @@ class RampControl:
             )
             cooking_demand_use_cases_list.append((cooking_demand_use_case, month))  # add tuple of (use_case, month)
         return cooking_demand_use_cases_list
+
+    def generate_electric_appliances_use_cases(self, input_data, admin_input):
+
+        # List for every month's use case
+        electric_appliances_use_cases_list = []
+
+        for month in range(1, 13):
+            # Create dict to store generated RAMP user instances
+            ramp_users_dict = {}
+            # Loop through every household survey respondent.
+            for user_name, user_data in input_data.items():
+                # Create user instance for this household survey respondent
+                new_user = ramp.User(
+                    user_name=user_name,
+                    num_users=user_data['num_users']
+                )
+
+                # Check if this household survey respondent is present in the settlement during this month
+                if month in user_data['months_present']:
+                    present = True
+                else:
+                    present = False
+
+                # Add appliances to this user.
+                for appliance_name, appliance_data in user_data['appliances'].items():
+                    # Get appliance's metadata
+                    appliance_metadata = admin_input['appliance_metadata'][appliance_name]
+
+                    # Get appliance's usage windows
+                    # Definition of usage windows is extremely messy. Propose to RAMP core to define usage windows in list?
+                    usage_windows = [  # Create list of usage windows
+                        appliance_data['usage_window_1'] if 'usage_window_1' in appliance_data.keys() else None,
+                        appliance_data['usage_window_2'] if 'usage_window_2' in appliance_data.keys() else None,
+                        appliance_data['usage_window_3'] if 'usage_window_3' in appliance_data.keys() else None,
+                    ]
+                    num_usage_windows = sum(x is not None for x in usage_windows)  # Count how many windows are not none
+
+                    # Add appliance to user instance
+                    new_user.add_appliance(
+                        name=appliance_name,  # Name of the appliance as specified in survey response
+                        number=appliance_data['num_app'],  # Number of identical appliances of this type that this user owns
+                        power=appliance_data['power'],  # Power of the appliance (actual power drawn, not nominal power)
+
+                        func_time=appliance_data['daily_usage_time'],  # Total time of use per day
+                        time_fraction_random_variability=appliance_metadata['daily_use_variability'],
+                        # Fraction of daily usage time which is subject to random variability
+                        func_cycle=appliance_data['func_cycle'],
+
+                        # Check if windows are given and set them
+                        # If no windows are specified,
+                        num_windows=num_usage_windows,
+                        window_1=usage_windows[0],
+                        window_2=usage_windows[1],
+                        window_3=usage_windows[2],
+
+                        random_var_w=appliance_metadata['usage_window_variability'],
+                        # appliance is only used on (RAMP-) workdays. User-individual workdays are checked when running
+                        # use_cases
+                        wd_we_type=0
+                    )
+
+                # Add deepcopy of user instance to ramp_user_dict
+                ramp_users_dict[user_name] = copy.deepcopy(new_user)
+
+            # Create RAMP use_case
+            electric_appliances_use_case = ramp.UseCase(
+                name='household_elec',
+                users=list(ramp_users_dict.values())
+            )
+
+            electric_appliances_use_cases_list.append((electric_appliances_use_case, month))
+
+        return electric_appliances_use_cases_list
