@@ -72,10 +72,3 @@ admin_input = {
     }
 }
 
-#%%
-from DAT_src.ramp_control import RampControl
-
-ramp_control = RampControl(365, '2018-01-01')
-
-cooking_demand_use_case = ramp_control.generate_cooking_demand_use_cases(cooking_demand_dict, admin_input)
-df = ramp_control.run_use_cases(cooking_demand_use_case, cooking_demand_dict)

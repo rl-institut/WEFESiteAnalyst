@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import copy
 from time import perf_counter
+from tqdm import tqdm
 
 
 class RampControl:
@@ -15,7 +16,7 @@ class RampControl:
         self.min_timeseries = pd.date_range(start_date, periods=number_of_days * 24 * 60, freq="Min")
         self.days_timeseries = pd.date_range(start_date, periods=number_of_days, freq="D")
 
-    def run_use_cases(self, use_cases_list, user_data):
+    def run_use_cases(self, use_cases_list, user_data, description):
         """
 
         :param use_cases_list:
@@ -23,24 +24,31 @@ class RampControl:
         :return:
         """
 
-        for entry in use_cases_list:
+        # Dict to store generated demand profiles
+        demand_profiles = {}
+
+        # Day of year counter
+        day_counter = 0
+        for entry in tqdm(use_cases_list, desc=description):
+
             use_case = entry[0]  # use_case object is first entry in tuple in use_cases_list
-            use_case_month = entry[1]  # second entry is month number
-            # Dict to store generated demand profiles
-            demand_profiles = {}
+            use_case_month = entry[1]  # month number of the use_case is second entry
 
             # Calculate peak time range of this use case
             peak_time_range = use_case.calc_peak_time_range()
 
             # Loop through all days of this month's use_case
-            day_counter = 0
+
             for day in self.days_timeseries[self.days_timeseries.month == use_case_month]:
                 # Return weekday of this day (Monday=0, Sunday=6)
                 weekday = day.weekday()
                 # Loop through all user instances (= user types)
                 for user in use_case.users:
-                    # Create dict entry for every user
-                    demand_profiles[user.user_name] = {}
+
+                    # Check if user_name does not exist in demand_profiles dict yet (=first day to be simulated)
+                    if user.user_name not in demand_profiles:
+                        # Create dict entry for every user
+                        demand_profiles[user.user_name] = {}
 
                     # Check if current weekday is working day of the user
                     if weekday in user_data[user.user_name]['working_days']:
@@ -50,10 +58,10 @@ class RampControl:
 
                     # Loop through each user of this user type
                     for _ in range(user.num_users):
-
                         # Loop through user's appliances
                         for appliance in user.App_list:
                             # Check if there is no dict entry for this appliance yet in the load profiles dict
+                            # (= first day of simulation)
                             if appliance.name not in demand_profiles[user.user_name]:  #
                                 # Create dict entry for this appliance with pre-allocated 2D numpy array
                                 # 1440 (minute) timesteps for each day to be simulated
@@ -74,7 +82,6 @@ class RampControl:
 
                 # Increase day counter
                 day_counter += 1
-                print(day_counter)
 
         # Create dataframe from dict
         # Loop through all users for which load profiles where generated
@@ -88,7 +95,10 @@ class RampControl:
             demand_profiles[user] = pd.DataFrame(user_dp)
 
         # Concat dataframe of each user in multi-level column dataframe and return
-        return pd.concat(demand_profiles, axis=1)
+        df = pd.concat(demand_profiles, axis=1)
+        df['datetime'] = self.min_timeseries
+        df.set_index('datetime', drop=True, inplace=True)
+        return df
 
     def generate_cooking_demand_use_cases(self, cooking_input_data, admin_input):
         """
@@ -218,11 +228,23 @@ class RampControl:
                     # Get appliance's usage windows
                     # Definition of usage windows is extremely messy. Propose to RAMP core to define usage windows in list?
                     usage_windows = [  # Create list of usage windows
-                        appliance_data['usage_window_1'] if 'usage_window_1' in appliance_data.keys() else None,
-                        appliance_data['usage_window_2'] if 'usage_window_2' in appliance_data.keys() else None,
-                        appliance_data['usage_window_3'] if 'usage_window_3' in appliance_data.keys() else None,
+                        np.array(appliance_data['usage_window_1'])*60 if 'usage_window_1' in appliance_data.keys() else
+                        None,
+                        np.array(appliance_data['usage_window_2'])*60 if 'usage_window_2' in appliance_data.keys() else
+                        None,
+                        np.array(appliance_data['usage_window_3'])*60 if 'usage_window_3' in appliance_data.keys() else
+                        None,
                     ]
                     num_usage_windows = sum(x is not None for x in usage_windows)  # Count how many windows are not none
+
+                    if present:  # if user is present
+                        func_time = int(appliance_data['daily_usage_time'] * 60)  # Func_time as specified
+                        func_cycle = appliance_data['func_cycle']
+                    else:  # if not present
+                        func_time = 0  # func_time is 0 -> therefore no demand is modeled
+                        # func_cycle needs to be set to 0, otherwise RAMP core increases func_time to be >= func_cycle
+                        func_cycle = 0
+
 
                     # Add appliance to user instance
                     new_user.add_appliance(
@@ -230,10 +252,10 @@ class RampControl:
                         number=appliance_data['num_app'],  # Number of identical appliances of this type that this user owns
                         power=appliance_data['power'],  # Power of the appliance (actual power drawn, not nominal power)
 
-                        func_time=appliance_data['daily_usage_time'],  # Total time of use per day
+                        func_time=func_time,  # Total time of use per day
                         time_fraction_random_variability=appliance_metadata['daily_use_variability'],
                         # Fraction of daily usage time which is subject to random variability
-                        func_cycle=appliance_data['func_cycle'],
+                        func_cycle=func_cycle,
 
                         # Check if windows are given and set them
                         # If no windows are specified,
@@ -245,7 +267,7 @@ class RampControl:
                         random_var_w=appliance_metadata['usage_window_variability'],
                         # appliance is only used on (RAMP-) workdays. User-individual workdays are checked when running
                         # use_cases
-                        wd_we_type=0
+                        wd_we_type=0  # 0 -> working days
                     )
 
                 # Add deepcopy of user instance to ramp_user_dict
