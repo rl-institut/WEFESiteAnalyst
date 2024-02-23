@@ -26,7 +26,9 @@ import pandas as pd
 from DAT_src.ramp_control import RampControl
 from DAT_src.cooking_demand import cooking_demand_dict
 from DAT_src.household_elec_demand import households_dict
+from DAT_src.agro_processing_demand import agro_processing_dict
 from DAT_src.admin_input import admin_input
+from DAT_src.drinking_water_demand import drinking_water_dict
 
 # Create instance of RampControl class, define timeframe to model load profiles
 ramp_control = RampControl(365, '2018-01-01')
@@ -45,23 +47,29 @@ The modeling of the 6 timeseries is performed separately in independent RAMP use
     water)
 """
 
+agro_processing_use_cases_list = ramp_control.generate_agro_processing_use_cases(agro_processing_dict, admin_input)
 elec_use_cases_list = ramp_control.generate_electric_appliances_use_cases(households_dict, admin_input)
 cooking_use_cases_list = ramp_control.generate_cooking_demand_use_cases(cooking_demand_dict, admin_input)
+drinking_water_use_cases_list = ramp_control.generate_drinking_water_use_cases(drinking_water_dict)
 
-
+#%%
 # Run load use_cases and create demand profiles
+drinking_water_dp = ramp_control.run_use_cases(drinking_water_use_cases_list, drinking_water_dict, 'Drinking water')
 elec_lp = ramp_control.run_use_cases(elec_use_cases_list, households_dict, 'Household appliances')
 cooking_dp = ramp_control.run_use_cases(cooking_use_cases_list, cooking_demand_dict, 'Cooking demand')
+agro_processing_dp = ramp_control.run_use_cases(agro_processing_use_cases_list, agro_processing_dict, 'Agro-processing')
 
 
 #%% Plot results
 from DAT_src import plotting
 from plotly.subplots import make_subplots
 
-fig = make_subplots(2,1, shared_xaxes=True)
+fig = make_subplots(4,1, shared_xaxes=True)
 
 fig = plotting.plotly_high_res_df(fig, df=elec_lp, subplot_row=1)
 fig = plotting.plotly_high_res_df(fig, df=cooking_dp, subplot_row=2)
-fig.update_layout(height=600)
+fig = plotting.plotly_high_res_df(fig, df=agro_processing_dp.resample('D').sum(), subplot_row=3)
+fig = plotting.plotly_high_res_df(fig, df=drinking_water_dp.resample('h').sum(), subplot_row=4)
+fig.update_layout(height=900)
 
 fig.show_dash(mode='external')

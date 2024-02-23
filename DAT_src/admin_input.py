@@ -36,5 +36,22 @@ admin_input = {
                     'efficiency': 0.2
                 }
             }
+        },
+    'agro_processing_metadata': {
+        'agro_processing_fuels': {
+            'diesel': {
+                'energy_content': 10,  # energy content in kWh per unit of fuel
+                'unit': 'l'
+            },
+            'electricity': {
+                'energy_content': 1,
+                'unit': 'kWh'
+            }
+        },
+        'husking_mill': {
+            'daily_use_variability': 0.2,
+            'usage_window_variability': 0.2,
+            'processed_per_run_variability': 0.2,
         }
+    }
 }
