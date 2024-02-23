@@ -1,17 +1,3 @@
-#%% Import packages
-
-import ramp
-import pandas as pd
-import numpy as np
-import copy
-from time import perf_counter
-
-# Define timeseries for which demand profiles will be generated
-days_nr = 3  # Number of days
-timeseries = pd.date_range("2018-01-01", periods=days_nr * 24 * 60, freq="Min")  # 2018 starts on Monday
-days_timeseries = pd.date_range("2018-01-01", periods=days_nr, freq="D")
-
-
 #%% Dummy dict of cooking demands
 
 cooking_demand_dict = {

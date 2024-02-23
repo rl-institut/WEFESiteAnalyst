@@ -19,120 +19,14 @@ In the OptiMG DAT we generate timeseries for the following demands:
 """
 
 
-#%% Household electricity demand
-# Dummy dict of households with electrical appliances
-# Will be read from surveys
-households_dict = {
-    'low_income_hh': {
-        'num_users': 1,
-        'months_present': [1, 2, 3, 4, 7, 8, 9, 10, 11, 12],  # months at which this user is present in the settlement
-        'working_days': [0, 1, 2, 3, 4, 5, 6],  # days at which this user uses his appliances
-        'appliances': {
-            'indoor_lights':
-                {
-                    'num_app': 3,  # number of appliances
-                    'power': 10,  # power in W
-                    'usage_window_1': [5, 7],  # usage window [start, end] in min of the day
-                    'usage_window_2': [20, 23],  # usage window [start, end] in min of the day
-                    'daily_usage_time': 2,  # daily time of use in min
-                    'func_cycle': 10  # minimal duration of switch on event in minutes
-                 },
-            'outdoor_lights':
-                {
-                    'num_app': 3,  # number of appliances
-                    'power': 15,  # power in W
-                    'usage_window_1': [5, 7],  # usage window [start, end] in min of the day
-                    'usage_window_2': [20, 23],  # usage window [start, end] in min of the day
-                    'daily_usage_time': 2,  # daily time of use in min
-                    'func_cycle': 10  # minimal duration of switch on event in minutes
-                 }
-        }
 
-
-    },
-    'medium_income_hh': {
-        'num_users': 1,
-        'months_present': [1, 2, 3, 4, 7, 8, 9, 10, 11, 12],  # months at which this user is present in the settlement
-        'working_days': [0, 1, 2, 3, 4, 5, 6],  # days at which this user uses his appliances
-        'appliances': {
-            'indoor_lights':
-                {
-                    'num_app': 3,  # number of appliances
-                    'power': 10,  # power in W
-                    'usage_window_1': [5, 7],  # usage window [start, end] in min of the day
-                    'usage_window_2': [20, 23],  # usage window [start, end] in min of the day
-                    'daily_usage_time': 2,  # daily time of use in min
-                    'func_cycle': 10  # minimal duration of switch on event in minutes
-                 }
-        }
-
-    },
-
-    'high_income_hh': {
-        'num_users': 1,
-        'months_present': [1, 2, 3, 4, 7, 8, 9, 10, 11, 12],  # months at which this user is present in the settlement
-        'working_days': [0, 1, 2, 3, 4, 5, 6],  # days at which this user uses his appliances
-        'appliances': {
-            'indoor_lights':
-                {
-                    'num_app': 3,  # number of appliances
-                    'power': 10,  # power in W
-                    'usage_window_1': [5, 7],  # usage window [start, end] in min of the day
-                    'usage_window_2': [20, 23],  # usage window [start, end] in min of the day
-                    'daily_usage_time': 2,  # daily time of use in min
-                    'func_cycle': 10  # minimal duration of switch on event in minutes
-                }
-        }
-    },
-}
-
-
-
-# Dummy dict of metadata input provided by the admin and not read from surveys
-# Includes data on random variability of model parameters specific to certain appliances
-admin_input = {
-    'appliance_metadata': {  # metadata specific to "standard" appliances (reported by select in survey)
-        'indoor_lights': {
-            'daily_use_variability': 0.2,
-            'usage_window_variability': 0.2
-        },
-        'outdoor_lights': {
-            'daily_use_variability': 0.3,
-            'usage_window_variability': 0.1
-        }
-    },
-    'cooking_metadata': {
-            'cooking_time_variability': 0.2,
-            'cooking_window_variability': 0.2,
-            'cooking_fuels': {
-                'firewood': {
-                    'energy_content': 3,  # energy content per unit of this fuel
-                    'unit': 'kg'
-                },
-                'charcoal': {
-                    'energy_content': 5,
-                    'unit': 'kg'
-                },
-                'biogas': {
-                    'energy_content': 10,
-                    'unit': 'l'
-                }
-            },
-            'cooking_stoves': {
-                'three_stone_fire': {
-                    'efficiency': 0.1
-                },
-                'advanced_firewood_stove': {
-                    'efficiency': 0.2
-                }
-            }
-        }
-}
 
 #%%
 import pandas as pd
 from DAT_src.ramp_control import RampControl
 from DAT_src.cooking_demand import cooking_demand_dict
+from DAT_src.household_elec_demand import households_dict
+from DAT_src.admin_input import admin_input
 
 # Create instance of RampControl class, define timeframe to model load profiles
 ramp_control = RampControl(365, '2018-01-01')
