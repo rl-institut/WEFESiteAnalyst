@@ -14,3 +14,4 @@ osmnx
 python-docx
 mss
 docx
+imgkit

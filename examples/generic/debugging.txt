@@ -1,1 +1,3 @@
-Green Energy Park nc file misses various values in the mid of the year. That's why the graphics show gaps for it.
+- how are average soil quality paramters calculated?
+- in the climate graphs, the x-axis denotation "time" is cut off
+- please add a legend to the hydrology map; denoting the different types of "water"; best also in different shades of blue
