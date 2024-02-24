@@ -1,3 +1,5 @@
 - how are average soil quality paramters calculated?
 - in the climate graphs, the x-axis denotation "time" is cut off
 - please add a legend to the hydrology map; denoting the different types of "water"; best also in different shades of blue
+- use cartoee for creating static maps which then can be included into the report
+https://geemap.org/notebooks/50_cartoee_quickstart/
