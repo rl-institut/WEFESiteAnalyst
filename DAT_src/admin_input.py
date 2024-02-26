@@ -53,5 +53,11 @@ admin_input = {
             'usage_window_variability': 0.2,
             'processed_per_run_variability': 0.2,
         }
+    },
+    'service_water_metadata': {
+        'irrigation': {
+            'daily_demand_variability': 0.2,
+            'demand_window_variability': 0.2
+        }
     }
 }

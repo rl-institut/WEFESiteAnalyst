@@ -5,6 +5,8 @@ import copy
 from time import perf_counter
 from tqdm import tqdm
 
+from exceptions import MissingInput
+
 
 class RampControl:
     """
@@ -426,7 +428,7 @@ class RampControl:
                     window_2=usage_windows[1],
                     window_3=usage_windows[2],
 
-                    fixed_cycle=1,  # every cooking demand has one duty cycle
+                    fixed_cycle=1,
 
                     p_11=drinking_water_demand['daily_demand']/num_usage_windows,
                     t_11=1,
@@ -449,3 +451,78 @@ class RampControl:
 
         return drinking_water_use_cases_list
 
+    def generate_service_water_use_cases(self, input_data, admin_input):
+
+        # List for every month's use case
+        service_water_use_cases_list = []
+
+        for month in range(1, 13):
+            # Create dict to store generated RAMP user instances
+            ramp_users_dict = {}
+            # Loop through every survey respondent.
+            for user_name, user_data in input_data.items():
+                # Create user instance for this household survey respondent
+                new_user = ramp.User(
+                    user_name=user_name,
+                    num_users=user_data['num_users']
+                )
+
+                for demand_name, demand_data in user_data['service_water_demands'].items():
+
+                    try:
+                        demand_metadata = admin_input['service_water_metadata'][demand_name]
+                    except KeyError:
+                        raise MissingInput('%s: No metadate provided in admin input.' % demand_name)
+
+                    # Count how many usage windows are defined
+                    num_usage_windows = sum(x is not None for x in demand_data['usage_windows'])  # Count how many windows are not none
+                    if num_usage_windows > 3:
+                        print("Survey respondent: %s - Demand: %s: More than 3 usage windows were defined. "
+                              "Only the first 3 are considered" % (user_name, demand_name))
+                        num_usage_windows = 3
+
+                    # Get this month's daily volume of this demand
+                    daily_demand = demand_data['daily_demand'][month]
+
+                    # Add appliance to user instance
+                    new_user.add_appliance(
+                        name=demand_name,
+                        number=1,  # Each water demand is modeled separately
+                        power=daily_demand/(demand_data['demand_duration']*60),  # = flow rate: total_demand/duration
+                        func_time=demand_data['demand_duration']*60,
+                        time_fraction_random_variability=demand_metadata['daily_demand_variability'],
+
+                        num_windows=num_usage_windows,
+                        window_1=minutes_wd(demand_data['usage_windows'][0]),
+                        window_2=minutes_wd(demand_data['usage_windows'][1]),
+                        window_3=minutes_wd(demand_data['usage_windows'][2]),
+
+                        wd_we_type=2,  # Service water demand is the same on every day of the week
+                    )
+
+                # Add deepcopy of user instance to ramp_user_dict
+                ramp_users_dict[user_name] = copy.deepcopy(new_user)
+
+            # Create RAMP use_case
+            service_water_use_case = ramp.UseCase(
+                name='service_water',
+                users=list(ramp_users_dict.values())
+            )
+
+            service_water_use_cases_list.append((service_water_use_case, month))
+
+        return service_water_use_cases_list
+
+
+def minutes_wd(window):
+    """
+    Turns usage window given in hours into minutes (needed for RAMP)
+    - if window is None -> returns None (no window specified)
+    - else returns numpy array of window in minutes
+    :param window:
+    :return:
+    """
+    if window is None:
+        return None
+    else:
+        return np.array(window) * 60
