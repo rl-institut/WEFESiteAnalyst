@@ -3,20 +3,17 @@ from koboextractor import KoboExtractor
 import json
 import pandas as pd
 
-#access your kobo account using your token
-your_token = 'ea290627972a055fd067e1efc02c803869b1747c' #Replace by your token
-kobo = KoboExtractor(your_token, 'https://kobo.humanitarianresponse.info/api/v2', debug=True)
+def load_kobo_data(form_id, api_token="ea290627972a055fd067e1efc02c803869b1747c"):
+    kobo_dict = None
 
-assets = kobo.list_assets()
-asset_uid = assets['results'][0]['uid']
+    kobo = KoboExtractor(api_token, 'https://kobo.humanitarianresponse.info/api/v2', debug=True)
 
-#access data submitted to a specific form using the form id
-form_id = 'aM4SL2TkbkMbs2s3sXLFGm' #Replace by your Form ID
-data = kobo.get_data(form_id, query=None, start=None, limit=None, submitted_after=None)
-# data = kobo.get_data(form_id, query=None, start=None, limit=None, submitted_after='2020-05-20T17:29:30')
+    #access data submitted to a specific form using the form id
+    data = kobo.get_data(form_id, query=None, start=None, limit=None, submitted_after=None)
 
-#convert your data from json to a pd dataframe
-results_dict = data['results']
-df = pd.json_normalize(data['results'])
-# preview your data -- this step is not compulsory
-df.head()
+    results_dict = data['results']  # get dict of survey results
+    df = pd.json_normalize(data['results'])  # get df of survey results
+
+    return results_dict, df
+
+
