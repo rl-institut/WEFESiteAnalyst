@@ -152,15 +152,23 @@ print("end_3 = ",in_bulb_end_3_wd)
 '''
 
 for x in substrings:
-    if (x in substrings) == True:
+    if (x in string) == True:
         if x == substrings[0]:
             start_1 = 0
-        elif x == substrings[1]
+            break
+        elif x == substrings[1]:
             start_1 = 7
-        elif x == substrings[2]
+            break
+        elif x == substrings[2]:
             start_1 = 10
-        elif x == substrings[3]
+            break
+        elif x == substrings[3]:
             start_1 = 12
-        elif x == substrings[4]
+            break
+        elif x == substrings[4]:
             start_1 = 18
+            break
+        elif x == substrings[5]:
+            start_1 = 22
+            break
 print(start_1)
