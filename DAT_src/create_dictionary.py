@@ -259,9 +259,167 @@ if first_survey["G_0/respondent_type"] == "household":
             drink_usage_time[window] = False
     time_window = first_survey["H_8/drink_time_H"].split()
 
-    drinking_water_dict_B["drinking_water_H"] = {
+    drinking_water_dict_H["drinking_water_H"] = {
         "daily_demand" : consume,
         "water_window" : drink_usage_time
     }
 
     print(drinking_water_dict_H)
+
+# Get the parameters - Service Water (Business)
+
+service_water_dict_B = {}
+
+if first_survey["G_0/respondent_type"] == "business":
+    unit_of_measurement_serv = first_survey["B_7/service_express"]
+    unit_serv = float(first_survey["B_7/serv_use"])
+    string_serv_window = first_survey["B_7/serv_time"]
+
+    if unit_of_measurement_serv == "serv_liter":
+        consume_serv = unit_serv
+    elif unit_of_measurement_serv == "serv_large_buck":
+        consume_serv = unit_serv * 10
+    elif unit_of_measurement_serv == "serv_medium_buck":
+        consume_serv = unit_serv * 5
+    elif unit_of_measurement_serv == "serv_small_buck":
+        consume_serv = unit_serv
+
+    service_usage_time = copy(defaults.usage_wd_defaults)
+
+    for window in service_usage_time:
+        if window in string_serv_window:
+            service_usage_time[window] = True
+        else:
+            service_usage_time[window] = False
+    time_window_serv = first_survey["B_7/serv_time"].split()
+
+    service_water_dict_B["service_water_business"] = {
+        "daily_demand": consume_serv,
+        "water_window": service_usage_time
+    }
+
+    print(service_water_dict_B)
+
+# Get the parameters - Service Water (Household)
+
+irrigation_water_dict_H = {}
+if first_survey["G_0/respondent_type"] == "household":
+    uom_dry_irr = first_survey["H_10/express_dry_H"]
+    unit_dry_irr = float(first_survey["H_10/irrigation_dry_H"])
+    string_irr_dry_window = first_survey["H_10/usage_dry_H"]
+
+    if uom_dry_irr == "serv_liter":
+        consume_dry_irr = unit_dry_irr
+    elif uom_dry_irr == "serv_large_buck":
+        consume_dry_irr = unit_dry_irr * 10
+    elif uom_dry_irr == "serv_medium_buck":
+        consume_dry_irr = unit_dry_irr * 5
+    elif uom_dry_irr == "serv_small_buck":
+        consume_dry_irr = unit_dry_irr
+
+    dry_irr_usage_time = copy(defaults.usage_wd_defaults)
+
+    for window in dry_irr_usage_time:
+        if window in string_irr_dry_window:
+            dry_irr_usage_time[window] = True
+        else:
+            dry_irr_usage_time[window] = False
+
+    uom_rainy_irr = first_survey["H_10/express_rainy_H"]
+    unit_rainy_irr = float(first_survey["H_10/irrigation_rainy_H"])
+    string_irr_rainy_window = first_survey["H_10/usage_rainy_H"]
+
+    if uom_rainy_irr == "serv_liter":
+        consume_rainy_irr = unit_rainy_irr
+    elif uom_rainy_irr == "serv_large_buck":
+        consume_rainy_irr = unit_rainy_irr * 10
+    elif uom_rainy_irr == "serv_medium_buck":
+        consume_rainy_irr = unit_rainy_irr * 5
+    elif uom_rainy_irr == "serv_small_buck":
+        consume_rainy_irr = unit_rainy_irr
+
+    rainy_irr_usage_time = copy(defaults.usage_wd_defaults)
+
+    for window in rainy_irr_usage_time:
+        if window in string_irr_rainy_window:
+            rainy_irr_usage_time[window] = True
+        else:
+            rainy_irr_usage_time[window] = False
+
+    string_rainy = first_survey["H_10/dry_season_H"]
+    season_dict = copy(defaults.months_present_defaults)
+
+    for month in season_dict:
+        if month in string_rainy:
+            season_dict[month] = consume_rainy_irr
+        else:
+            season_dict[month] = consume_dry_irr
+
+    irrigation_water_dict_H["irrigation_water_household"] = {
+        "daily_demand": season_dict,
+        "irr_window_dry": dry_irr_usage_time,
+        "irr_window_rainy" : rainy_irr_usage_time
+    }
+
+    print(irrigation_water_dict_H)
+
+animal_water_dict_H = {}
+if first_survey["G_0/respondent_type"] == "household":
+    uom_dry_animal = first_survey["H_11/express_animal_dry_H"]
+    unit_dry_animal = float(first_survey["H_11/animal_dry_H"])
+    string_animal_dry_window = first_survey["H_11/usage_animal_dry_H"]
+
+    if uom_dry_animal == "serv_liter":
+        consume_dry_animal = unit_dry_animal
+    elif uom_dry_animal == "serv_large_buck":
+        consume_dry_animal = unit_dry_animal * 10
+    elif uom_dry_animal == "serv_medium_buck":
+        consume_dry_animal = unit_dry_animal * 5
+    elif uom_dry_animal == "serv_small_buck":
+        consume_dry_animal = unit_dry_animal
+
+    dry_animal_usage_time = copy(defaults.usage_wd_defaults)
+
+    for window in dry_animal_usage_time:
+        if window in string_animal_dry_window:
+            dry_animal_usage_time[window] = True
+        else:
+            dry_animal_usage_time[window] = False
+
+    uom_rainy_animal = first_survey["H_11/express_animal_rainy_H"]
+    unit_rainy_animal = float(first_survey["H_11/animal_rainy_H"])
+    string_animal_rainy_window = first_survey["H_11/usage_animal_rainy_H"]
+
+    if uom_rainy_animal == "serv_liter":
+        consume_rainy_animal = unit_rainy_animal
+    elif uom_rainy_animal == "serv_large_buck":
+        consume_rainy_animal = unit_rainy_animal * 10
+    elif uom_rainy_animal == "serv_medium_buck":
+        consume_rainy_animal = unit_rainy_animal * 5
+    elif uom_rainy_irr == "serv_small_buck":
+        consume_rainy_animal = unit_rainy_animal
+
+    rainy_animal_usage_time = copy(defaults.usage_wd_defaults)
+
+    for window in rainy_animal_usage_time:
+        if window in string_animal_rainy_window:
+            rainy_animal_usage_time[window] = True
+        else:
+            rainy_animal_usage_time[window] = False
+
+    string_rainy_animal = first_survey["H_10/dry_season_H"]
+    season_dict_animal = copy(defaults.months_present_defaults)
+
+    for month in season_dict_animal:
+        if month in string_rainy_animal:
+            season_dict_animal[month] = consume_rainy_animal
+        else:
+            season_dict_animal[month] = consume_dry_animal
+
+    animal_water_dict_H["animal_water_household"] = {
+        "daily_demand": season_dict_animal,
+        "irr_window_dry": dry_animal_usage_time,
+        "irr_window_rainy" : rainy_animal_usage_time
+    }
+
+    print(animal_water_dict_H)
