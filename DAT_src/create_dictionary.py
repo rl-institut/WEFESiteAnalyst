@@ -16,7 +16,7 @@ for month in month_dict:
     else:
         month_dict[month] = False
 
-print(month_dict)
+print(month_dict)                                                   # Months of stay in the village
 
 # Get the parameters - Working days (business)
 if first_survey["G_0/respondent_type"] == "business":
@@ -29,7 +29,7 @@ if first_survey["G_0/respondent_type"] == "business":
         else:
             work_days_dict[day] = False
 
-    print(work_days_dict)
+    print(work_days_dict)                                           # Working days (business)
 
 # Get the parameters - Working days (agro-processing)
 if first_survey["G_0/respondent_type"] == "agroprocessing":
@@ -42,7 +42,7 @@ if first_survey["G_0/respondent_type"] == "agroprocessing":
         else:
             work_days_dict_AP[day] = False
 
-    print(work_days_dict_AP)
+    print(work_days_dict_AP)                                        # Working days (agroprocessing)
 
 
 # Get the parameters - Electrical appliances (Business)
@@ -51,7 +51,7 @@ app_dict_B = {}
 if first_survey["G_0/respondent_type"] == "business":
     for key, data in first_survey.items():
         if "B_11/" in key and "_power" in key :
-            app_name = key.replace("B_11/","", 1).replace("_power","",1)    # appliance name
+            app_name = key.replace("B_11/","", 1).replace("_power","",1)        # appliance name
             number = first_survey["B_11/"+app_name+"_number"]
             power = first_survey["B_11/"+app_name+"_power"]
             value = first_survey ["B_11/"+app_name+"_value"]
@@ -67,11 +67,11 @@ if first_survey["G_0/respondent_type"] == "business":
                     usage_wd_dict[window] = False
             time_window = first_survey["B_11/"+app_name+"_usage_wd"].split()
             app_dict_B[app_name] = {
-                "number" : float(number),           # number of appliances
-                "power" : float(power),             # appliance power in W
-                "value" : float(value),             # appliance value
-                "usage_time": float(hour)*60,       # appliance operating usage time in min
-                "time_window" : usage_wd_dict       # appliance usage windows
+                "number" : float(number),                           # quantity of appliance
+                "power" : float(power),                             # appliance power in W
+                "value" : float(value),                             # appliance value
+                "usage_time": float(hour)*60,                       # appliance operating usage time in min
+                "time_window" : usage_wd_dict                       # appliance usage windows
             }
 
 
@@ -99,7 +99,7 @@ if first_survey["G_0/respondent_type"] == "household":
                     usage_wd_dict[window] = False
             time_window = first_survey["H_16/"+app_name+"_usage_wd_H"].split()
             app_dict_H[app_name] = {
-                "number" : float(number),                                   # number of appliances
+                "number" : float(number),                                   # quantity of appliance
                 "power" : float(power),                                     # appliance power in W
                 "value" : float(value),                                     # appliance value
                 "usage_time": float(hour)*60,                               # appliance operating usage time in min
@@ -114,19 +114,43 @@ cook_dict_B = {}
 if first_survey["G_0/respondent_type"] == "business":
     for key, data in first_survey.items():
         if "B_13" in key and "_time" in key :
-            fuel_name = key.replace("B_13","", 1).replace("_time","",1)
+            fuel_name = key.replace("B_13","", 1).replace("_time","",1)     # fuel name
             time_cons = first_survey["B_13"+fuel_name+"_time"]
             unit = first_survey["B_13"+fuel_name+"_unit"]
-            kg_bag = first_survey["B_13"+fuel_name+"_bag"]
-            quantity = first_survey["B_13"+fuel_name+"_amount"]
-            price = first_survey["B_13"+fuel_name+"_cost"]
+            kg_bag = float(first_survey["B_13"+fuel_name+"_bag"])
+            quantity = float(first_survey["B_13"+fuel_name+"_amount"])
+            price = float(first_survey["B_13"+fuel_name+"_cost"])
+
+            if time_cons == "daily" :
+                if unit == "kilogram" :
+                    daily_cons = quantity
+                elif unit == "liter" :
+                    daily_cons = quantity                      # to be multiplied by density (by user)
+                elif unit == "bag" or unit == "cylinder":
+                    daily_cons = quantity * kg_bag
+            if time_cons == "weekly" :
+                if unit == "kilogram" :
+                    daily_cons = quantity/7
+                elif unit == "liter" :
+                    daily_cons = quantity/7                    # to be multiplied by density (by user)
+                elif unit == "bag" or unit == "cylinder":
+                    daily_cons = quantity * kg_bag/7
+            if time_cons == "monthly" :
+                if unit == "kilogram" :
+                    daily_cons = quantity/30
+                elif unit == "liter" :
+                    daily_cons = quantity/30                   # to be multiplied by density (by user)
+                elif unit == "bag" or unit == "cylinder":
+                    daily_cons = quantity * kg_bag/30
+
 
             cook_dict_B[fuel_name] = {
-            "time": time_cons,
-            "unit": unit,                                                   # appliance power
-            "bag": float(kg_bag),                                           # appliance value
-            "quantity": float(quantity),                                    # appliance operating hours
-            "price": float(price)                                           # appliance time windows
+            "time": time_cons,                                  # time window to express fuel consumption
+            "unit": unit,                                       # unit to express fuel consumption
+            "bag": kg_bag,                                      # kg per unit of fuel
+            "quantity": quantity,                               # quantity of unit consumption in the time window
+            "price": price,                                     # price per unit
+            "fuel_amount": daily_cons                           # daily fuel consumption
         }
 
     print(cook_dict_B)
@@ -153,10 +177,10 @@ if first_survey["G_0/respondent_type"] == "business":
             time_window = first_survey["B_13_meal/usage_meal"].split()
 
             meal_dict_B["meal_business"] = {
-            "meal_week" : float(week),
-            "meal_fuel" : fuel,
-            "meal_cooking_device" : cooking_device,
-            "meal_usage_time" : meal_usage_time
+            "meal_week" : float(week),                              # number of meals per week
+            "meal_fuel" : fuel,                                     # fuel used for meals
+            "meal_stove" : cooking_device,                          # stove used for meals
+            "meal_usage_time" : meal_usage_time                     # meals time window
             }
 
     print(meal_dict_B)
@@ -170,16 +194,39 @@ if first_survey["G_0/respondent_type"] == "household":
             fuel_name = key.replace("H_18","", 1).replace("_time_H","",1)
             time_cons = first_survey["H_18"+fuel_name+"_time_H"]
             unit = first_survey["H_18"+fuel_name+"_unit_H"]
-            kg_bag = first_survey ["H_18"+fuel_name+"_bag_H"]
-            quantity = first_survey["H_18"+fuel_name+"_amount_H"]
-            price = first_survey["H_18"+fuel_name+"_cost_H"]
+            kg_bag = float(first_survey ["H_18"+fuel_name+"_bag_H"])
+            quantity = float(first_survey["H_18"+fuel_name+"_amount_H"])
+            price = float(first_survey["H_18"+fuel_name+"_cost_H"])
+
+            if time_cons == "daily" :
+                if unit == "kilogram" :
+                    daily_cons = quantity
+                elif unit == "liter" :
+                    daily_cons = quantity                      # to be multiplied by density (by user)
+                elif unit == "bag" or unit == "cylinder":
+                    daily_cons = quantity * kg_bag
+            if time_cons == "weekly" :
+                if unit == "kilogram" :
+                    daily_cons = quantity/7
+                elif unit == "liter" :
+                    daily_cons = quantity/7                    # to be multiplied by density (by user)
+                elif unit == "bag" or unit == "cylinder":
+                    daily_cons = quantity * kg_bag/7
+            if time_cons == "monthly" :
+                if unit == "kilogram" :
+                    daily_cons = quantity/30
+                elif unit == "liter" :
+                    daily_cons = quantity/30                   # to be multiplied by density (by user)
+                elif unit == "bag" or unit == "cylinder":
+                    daily_cons = quantity * kg_bag/30
 
             cook_dict_H[fuel_name] = {
-            "time": time_cons,
-            "unit": unit,                                                   # appliance power
-            "bag": float(kg_bag),                                           # appliance value
-            "quantity": float(quantity),                                    # appliance operating hours
-            "price": float(price)                                           # appliance time windows
+            "time": time_cons,                                  # time window to express fuel consumption
+            "unit": unit,                                       # unit to express fuel consumption
+            "bag": kg_bag,                                      # kg per unit of fuel
+            "quantity": quantity,                               # quantity of unit consumption in the time window
+            "price": price,                                     # price per unit
+            "fuel_amount": daily_cons                           # daily fuel consumption
         }
 
     print(cook_dict_H)
@@ -205,10 +252,10 @@ if first_survey["G_0/respondent_type"] == "household":
             time_window = first_survey["H_18l/usage_meal_H"].split()
 
             meal_dict_H["meal_household"] = {
-            "meal_week" : float(week),
-            "meal_fuel" : fuel,
-            "meal_cooking_device" : cooking_device,
-            "meal_usage_time" : meal_usage_time
+            "meal_week" : float(week),                              # number of meals per week
+            "meal_fuel" : fuel,                                     # fuel used for meals
+            "meal_stove" : cooking_device,                          # stove used for meals
+            "meal_usage_time" : meal_usage_time                     # meals time window
             }
 
     print(meal_dict_H)
@@ -240,8 +287,8 @@ if first_survey["G_0/respondent_type"] == "business":
     time_window = first_survey["B_7/drink_time"].split()
 
     drinking_water_dict_B["drinking_water_B"] = {
-        "daily_demand" : consume,
-        "water_window" : drink_usage_time
+        "daily_demand" : consume,                                   # daily drinking water demand
+        "water_window" : drink_usage_time                           # drinking water usage window
     }
 
     print(drinking_water_dict_B)
@@ -273,8 +320,8 @@ if first_survey["G_0/respondent_type"] == "household":
     time_window = first_survey["H_8/drink_time_H"].split()
 
     drinking_water_dict_H["drinking_water_H"] = {
-        "daily_demand" : consume,
-        "water_window" : drink_usage_time
+        "daily_demand" : consume,                               # daily drinking water demand
+        "water_window" : drink_usage_time                       # drinking water usage window
     }
 
     print(drinking_water_dict_H)
@@ -369,9 +416,9 @@ if first_survey["G_0/respondent_type"] == "household":
             season_dict[month] = consume_dry_irr
 
     irrigation_water_dict_H["irrigation_water_household"] = {
-        "daily_demand": season_dict,
-        "irr_window_dry": dry_irr_usage_time,
-        "irr_window_rainy" : rainy_irr_usage_time
+        "daily_demand": season_dict,                                # irrigation water demand of typical day for each month
+        "irr_window_dry": dry_irr_usage_time,                       # irrigation water time window (dry season)
+        "irr_window_rainy" : rainy_irr_usage_time                   # irrigation water time window (rainy season)
     }
 
     print(irrigation_water_dict_H)
@@ -430,9 +477,9 @@ if first_survey["G_0/respondent_type"] == "household":
             season_dict_animal[month] = consume_dry_animal
 
     animal_water_dict_H["animal_water_household"] = {
-        "daily_demand": season_dict_animal,
-        "irr_window_dry": dry_animal_usage_time,
-        "irr_window_rainy" : rainy_animal_usage_time
+        "daily_demand": season_dict_animal,                             # animal water demand of typical day for each month
+        "irr_window_dry": dry_animal_usage_time,                        # animal water time window (dry season)
+        "irr_window_rainy" : rainy_animal_usage_time                    # animal water time window (rainy season)
     }
 
     print(animal_water_dict_H)
@@ -482,12 +529,12 @@ if first_survey["G_0/respondent_type"] == "agroprocessing":
                 months_AP[k] = months_AP[k] / exp
 
             agroproc_dict[mach_name] = {
-                "fuel": fuel_AP,
-                "crop_processed_per_fuel": float(product),
-                "throughput": float(efficiency),
-                "usage_time": float(hour_AP) * 60,  # machine operating usage time in min
-                "time_window": usage_AP_dict,  # machine usage windows
-                "crop_processed_per_day" : months_AP
+                "fuel": fuel_AP,                                        # agroprocessing machine fuel
+                "crop_processed_per_fuel": float(product),              # crop processed [kg] per unit of fuel
+                "throughput": float(efficiency),                        # [kg] of crop processed per [h] of machine operation
+                "usage_time": float(hour_AP) * 60,                      # machine operating usage time in min
+                "time_window": usage_AP_dict,                           # machine usage windows
+                "crop_processed_per_day" : months_AP                    # crop processed on a typical working day for each months
             }
 
     print(agroproc_dict)
