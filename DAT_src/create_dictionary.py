@@ -18,7 +18,7 @@ for month in month_dict:
 
 print(month_dict)
 
-# Get the parameters - Working days
+# Get the parameters - Working days (business)
 if first_survey["G_0/respondent_type"] == "business":
     string_day = first_survey["B_2a/working_day"]
     work_days_dict = copy(defaults.working_day_default)
@@ -30,6 +30,19 @@ if first_survey["G_0/respondent_type"] == "business":
             work_days_dict[day] = False
 
     print(work_days_dict)
+
+# Get the parameters - Working days (agro-processing)
+if first_survey["G_0/respondent_type"] == "agroprocessing":
+    string_day_AP = first_survey["AP_2c/working_day_AP"]
+    work_days_dict_AP = copy(defaults.working_day_default)
+
+    for day in work_days_dict_AP:
+        if day in string_day_AP:
+            work_days_dict_AP[day] = True
+        else:
+            work_days_dict_AP[day] = False
+
+    print(work_days_dict_AP)
 
 
 # Get the parameters - Electrical appliances (Business)
@@ -423,3 +436,59 @@ if first_survey["G_0/respondent_type"] == "household":
     }
 
     print(animal_water_dict_H)
+
+# Get the parameters - Agro processing demand (Agroprocessing)
+agroproc_dict = {}
+
+if first_survey["G_0/respondent_type"] == "agroprocessing":
+    for key, data in first_survey.items():
+        if "AP_5/" in key and "_motor_AP" in key:
+            mach_name = key.replace("AP_5/", "", 1).replace("_motor_AP", "", 1)  # machinery name
+            fuel_AP = first_survey["AP_5/" + mach_name + "_motor_AP"]
+            product = first_survey["AP_5/" + mach_name + "_prod_onerun_AP"]
+            efficiency = first_survey["AP_5/" + mach_name + "_eff_AP"]
+            hour_AP = first_survey["AP_5/" + mach_name + "_hour_AP"]
+            string_AP = first_survey["AP_5/" + mach_name + "_usage_AP"]
+
+            usage_AP_dict = copy(defaults.usage_wd_defaults)
+
+            for window in usage_AP_dict:
+                if window in string_AP:
+                    usage_AP_dict[window] = True
+                else:
+                    usage_AP_dict[window] = False
+
+            months_AP = {
+                'January': float(first_survey["AP_5/" + mach_name + "_prod_jan_AP"]),
+                'February': float(first_survey["AP_5/" + mach_name + "_prod_feb_AP"]),
+                'March': float(first_survey["AP_5/" + mach_name + "_prod_mar_AP"]),
+                'April': float(first_survey["AP_5/" + mach_name + "_prod_apr_AP"]),
+                'May': float(first_survey["AP_5/" + mach_name + "_prod_may_AP"]),
+                'June': float(first_survey["AP_5/" + mach_name + "_prod_jun_AP"]),
+                'July': float(first_survey["AP_5/" + mach_name + "_prod_jul_AP"]),
+                'August': float(first_survey["AP_5/" + mach_name + "_prod_aug_AP"]),
+                'September': float(first_survey["AP_5/" + mach_name + "_prod_sep_AP"]),
+                'October': float(first_survey["AP_5/" + mach_name + "_prod_oct_AP"]),
+                'November': float(first_survey["AP_5/" + mach_name + "_prod_nov_AP"]),
+                'December': float(first_survey["AP_5/" + mach_name + "_prod_dec_AP"])
+            }
+            if first_survey["AP_5/" + mach_name + "_prod_exp_AP"] == "daily":
+                exp = 1
+            elif first_survey["AP_5/" + mach_name + "_prod_exp_AP"] == "weekly":
+                exp = 7
+            elif first_survey["AP_5/" + mach_name + "_prod_exp_AP"] == "monthly":
+                exp = 30
+            for k in months_AP:
+                months_AP[k] = months_AP[k] / exp
+
+            agroproc_dict[mach_name] = {
+                "fuel": fuel_AP,
+                "crop_processed_per_fuel": float(product),
+                "throughput": float(efficiency),
+                "usage_time": float(hour_AP) * 60,  # machine operating usage time in min
+                "time_window": usage_AP_dict,  # machine usage windows
+                "crop_processed_per_day" : months_AP
+            }
+
+    print(agroproc_dict)
+
