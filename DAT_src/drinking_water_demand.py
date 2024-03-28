@@ -10,7 +10,7 @@ drinking_water_dict = {
         }
     },
     'medium_income_hh': {
-        'num_users': 20,
+        'num_users': 1,
         'months_present': [1, 2, 3, 4, 7, 8, 9, 10, 11, 12],
         'working_days': [0, 1, 2, 3, 4, 5],  # days at which this user uses his appliances
         'drinking_water_demand': {

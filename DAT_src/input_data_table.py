@@ -52,6 +52,27 @@ test_data = [
     }
 ]
 
+#%%
+test_app_1 = pd.DataFrame([
+    {
+        'id': 1,
+        'user_id': 1,
+        'name': 'indoor_lights',
+        'number': 4,
+        'power': 6,
+        'usage_time': 2,
+        'usage_window': 'window_1, window_2, window_3'
+    },
+    {
+        'id': 2,
+        'user_id': 1,
+        'name': 'TV',
+        'number': 1,
+        'power': 50,
+        'usage_time': 1,
+        'usage_window': 'window_1, window_2, window_3'
+    }
+])
 
 #%% Prepare table for dash
 
@@ -64,7 +85,7 @@ for row in test_data:  # loop through every row of table (=every survey response
             # Add this cells data to sub_data_dict
             sub_data_dict[(row['id'], key)] = copy(value)
 
-            # -- Replace this rows value with string
+            # -- Replace this rows value with string: comma separated list of subdict keys --
             new_cell_string = ""
             for name in value:
                 new_cell_string = new_cell_string + name + ", "
@@ -159,4 +180,52 @@ app.run_server(debug=True, port=8052)
 print('done')
 
 
+#%% Function design: Datatable with sub-tables for certain columns
 
+
+# Dict containing information about sub-data linked to main datatable
+# One entry for every column that contains sub-data
+# - key: column of main datatable which contains specified sub-data
+#   o df: dataframe containing sub-data
+#   o foreign_key: column name of sub-data dataframe which contains foreign keys linking to main datatable (column "id")
+
+user_df = pd.DataFrame()
+usage_windows_df = pd.DataFrame()
+
+relational_data = {
+    'users': {
+        'df': user_df,
+        'unique_key': 'user_id',  # column containing this df unique key
+        'child_tables': {  # containing all relations to tables with related sub-data
+            'appliances': 'FK_user_id'  # table_name (of child table): column_name of foreign key in child table
+        },
+        'parent_tables': {}
+    },
+    'appliances': {
+        'df': test_app_1,
+        'unique_key': 'appliance_id',
+        'child_tables': {
+            'usage_windows': 'FK_appliance_id'
+        },
+        'parent_tables': {
+            'users': 'FK_user_id'  # table_name (of parent table): column name of foreign key in this (child) table
+        }
+    },
+    'usage_windows': {
+        'df': usage_windows_df,
+        'unique_key': 'usage_window_id',
+        'child_tables': {},
+        'parent_tables': {
+            'appliances': 'FK_appliance_id'
+        }
+    }
+}
+
+def datatable_with_sub_table(main_table_df, sub_data):
+    """
+
+    :param main_table_df: Dataframe containing data of main datatable. Must contain "id" column
+    :param sub_data_dict: Dict containing dataframes with sub-data of certain columns in main datatable.
+    -> Dict key is name of corresponding column in
+    :return:
+    """

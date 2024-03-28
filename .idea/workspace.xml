@@ -27,16 +27,19 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9fb520b-0171-4c5e-9970-c97a4b02cb25" name="Default Changelist" comment="Agro-processing and drinking water demand RAMP model">
-      <change afterPath="$PROJECT_DIR$/.idea/other.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DAT_src/exceptions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DAT_src/service_water_demand.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ADRM.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ADRM.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="f9fb520b-0171-4c5e-9970-c97a4b02cb25" name="Default Changelist" comment="Data preprocessing and visualisation">
+      <change afterPath="$PROJECT_DIR$/DAT_src/data_analysis_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DAT_src/display_relational_df.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DAT_src/ramp_model_main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DAT_src/relational_df.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DAT_src/survey_data_analysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAT_src/admin_input.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAT_src/admin_input.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DAT_src/dat_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAT_src/dat_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAT_src/ramp_control.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAT_src/ramp_control.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAT_src/drinking_water_demand.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAT_src/drinking_water_demand.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAT_src/input_data_table.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAT_src/input_data_table.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAT_src/plotting.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAT_src/plotting.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAT_src/service_water_demand.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAT_src/service_water_demand.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAT_src/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAT_src/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +52,9 @@
         <option value="Python Script" />
       </list>
     </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/api_preprocessing" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -92,29 +98,7 @@
       <recent name="C:\Users\johan\PycharmProjects\WEFESiteAnalyst_DAT_dev_local\DAT_src" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.dat_main">
-    <configuration name="Earth Engine API" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="ADRM" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/Earth Engine API.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.data_analysis_test">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="ADRM" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -137,7 +121,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="cooking_demand" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="dash_example_table" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ADRM" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -150,7 +134,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DAT_src/cooking_demand.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DAT_src/dash_example_table.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -159,7 +143,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="dat_main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="data_analysis_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ADRM" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -172,7 +156,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DAT_src/dat_main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DAT_src/data_analysis_test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -181,7 +165,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="relief_map" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="input_data_table" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ADRM" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -189,14 +173,36 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DAT_src" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/relief_map.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DAT_src/input_data_table.py" />
       <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="preprocessing_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ADRM" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DAT_src" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DAT_src/preprocessing_test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
@@ -227,11 +233,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.dat_main" />
-        <item itemvalue="Python.cooking_demand" />
+        <item itemvalue="Python.data_analysis_test" />
         <item itemvalue="Python.test" />
-        <item itemvalue="Python.Earth Engine API" />
-        <item itemvalue="Python.relief_map" />
+        <item itemvalue="Python.input_data_table" />
+        <item itemvalue="Python.dash_example_table" />
+        <item itemvalue="Python.preprocessing_test" />
       </list>
     </recent_temporary>
   </component>
@@ -253,6 +259,16 @@
       <workItem from="1708696443226" duration="1611000" />
       <workItem from="1708698519709" duration="5698000" />
       <workItem from="1708939823392" duration="6333000" />
+      <workItem from="1709022525572" duration="6184000" />
+      <workItem from="1709045434611" duration="1088000" />
+      <workItem from="1709046546202" duration="10325000" />
+      <workItem from="1709108423030" duration="1426000" />
+      <workItem from="1709110289127" duration="21400000" />
+      <workItem from="1710853196400" duration="7222000" />
+      <workItem from="1711033520249" duration="1381000" />
+      <workItem from="1711099934691" duration="10466000" />
+      <workItem from="1711359406825" duration="18256000" />
+      <workItem from="1711614711823" duration="4493000" />
     </task>
     <task id="LOCAL-00001" summary="Input layer updated">
       <created>1592059227693</created>
@@ -331,7 +347,31 @@
       <option name="project" value="LOCAL" />
       <updated>1708704321873</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="update .gitignore">
+      <option name="closed" value="true" />
+      <created>1708965828777</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1708965828777</updated>
+    </task>
+    <task id="LOCAL-00012" summary="update .gitignore">
+      <option name="closed" value="true" />
+      <created>1708965900967</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1708965900967</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Data preprocessing and visualisation">
+      <option name="closed" value="true" />
+      <created>1709217080847</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1709217080847</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -371,7 +411,9 @@
     <MESSAGE value="Update plotting functions and bug fixes" />
     <MESSAGE value="Separate temporary RAMP input dicts in individual files" />
     <MESSAGE value="Agro-processing and drinking water demand RAMP model" />
-    <option name="LAST_COMMIT_MESSAGE" value="Agro-processing and drinking water demand RAMP model" />
+    <MESSAGE value="update .gitignore" />
+    <MESSAGE value="Data preprocessing and visualisation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Data preprocessing and visualisation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -386,6 +428,31 @@
           <line>143</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/DAT_src/test.py</url>
+          <line>4</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/DAT_src/dash_example_table.py</url>
+          <line>73</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/DAT_src/dash_example_table.py</url>
+          <line>16</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/DAT_src/relational_df.py</url>
+          <line>48</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/DAT_src/data_analysis_test.py</url>
+          <line>32</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -398,8 +465,11 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/WEFESiteAnalyst_DAT_dev_local$Earth_Engine_API.coverage" NAME="Earth Engine API Coverage Results" MODIFIED="1708075873228" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/WEFESiteAnalyst_DAT_dev_local$input_data_table.coverage" NAME="input_data_table Coverage Results" MODIFIED="1709119971614" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DAT_src" />
+    <SUITE FILE_PATH="coverage/WEFESiteAnalyst_DAT_dev_local$data_analysis_test.coverage" NAME="data_analysis_test Coverage Results" MODIFIED="1711473736231" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DAT_src" />
+    <SUITE FILE_PATH="coverage/WEFESiteAnalyst_DAT_dev_local$dash_example_table.coverage" NAME="dash_example_table Coverage Results" MODIFIED="1709119290446" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DAT_src" />
     <SUITE FILE_PATH="coverage/WEFESiteAnalyst_DAT_dev_local$cooking_demand.coverage" NAME="cooking_demand Coverage Results" MODIFIED="1708620376013" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DAT_src" />
-    <SUITE FILE_PATH="coverage/WEFESiteAnalyst_DAT_dev_local$test.coverage" NAME="test Coverage Results" MODIFIED="1708617819943" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DAT_src" />
+    <SUITE FILE_PATH="coverage/WEFESiteAnalyst_DAT_dev_local$test.coverage" NAME="test Coverage Results" MODIFIED="1708969568673" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DAT_src" />
     <SUITE FILE_PATH="coverage/WEFESiteAnalyst_DAT_dev_local$dat_main.coverage" NAME="dat_main Coverage Results" MODIFIED="1708964708503" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DAT_src" />
   </component>
 </project>

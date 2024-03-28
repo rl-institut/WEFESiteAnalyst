@@ -160,7 +160,7 @@ def plotly_high_res_df(figure, df, subplot_col=1, subplot_row=1, legend=None, le
             if prefix != "":
                 name = prefix+' : '.join(column_name)
             else:
-                name = column_name
+                name = ' : '.join(column_name)
 
             figure = figure.add_trace(go.Scattergl(
                 name=name,  # use df column_name as name for trace (displayed in legend)
