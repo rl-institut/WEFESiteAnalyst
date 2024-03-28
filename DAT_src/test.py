@@ -1,12 +1,3 @@
-class Parent():
-    def __init__(self, a, b):
-        print('a', a)
-        print('b', b)
+from data_analysis_test import users
 
-class Child(Parent):
-    def __init__(self, c, d, *args, **kwargs):
-        print('c', c)
-        print('d', d)
-        super(Child, self).__init__(*args, **kwargs)
-
-test = Child(1,2,3,4)
+users = users.df.drop(['num'], axis=1)

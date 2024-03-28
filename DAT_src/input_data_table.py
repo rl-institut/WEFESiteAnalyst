@@ -137,7 +137,8 @@ app.layout = html.Div(
     className="row")
 
 @app.callback(
-    Output("details", "children"), Input("table", "active_cell"),
+    Output("details", "children"),
+    Input("table", "active_cell"),
 )
 def cell_clicked(active_cell):
     if active_cell is None:

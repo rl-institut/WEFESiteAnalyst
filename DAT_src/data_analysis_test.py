@@ -30,9 +30,9 @@ appliances = [
     }
 ]
 
-users = RelationalDf('users', 'id', pd.DataFrame(users))
-appliances = RelationalDf('appliances', 'id', pd.DataFrame(appliances))
-
+users = RelationalDf('users', 'users', 'id', pd.DataFrame(users))
+appliances = RelationalDf('appliances', 'appliances', 'id', pd.DataFrame(appliances))
 users.add_child_table(appliances, 'user_id')
 
-users.display_table(10)
+first_table = users
+display_tables = {users.table_id: users, appliances.table_id: appliances}
