@@ -2,6 +2,8 @@ import json
 from DAT_src.kobo_api_access import load_kobo_data
 import defaults
 from copy import copy
+from conversion_functions import convert
+from conversion_functions import convert_usage_windows
 
 with open("first_survey.json", "r") as file:
     first_survey = json.load(file)
@@ -15,8 +17,8 @@ for month in month_dict:
         month_dict[month] = True
     else:
         month_dict[month] = False
-
-print(month_dict)                                                   # Months of stay in the village
+convert(month_dict)
+print(convert(month_dict))                                                   # Months of stay in the village
 
 # Get the parameters - Working days (business)
 if first_survey["G_0/respondent_type"] == "business":
@@ -29,7 +31,8 @@ if first_survey["G_0/respondent_type"] == "business":
         else:
             work_days_dict[day] = False
 
-    print(work_days_dict)                                           # Working days (business)
+    convert(work_days_dict)
+    print(convert(work_days_dict))                                           # Working days (business)
 
 # Get the parameters - Working days (agro-processing)
 if first_survey["G_0/respondent_type"] == "agroprocessing":
@@ -44,6 +47,50 @@ if first_survey["G_0/respondent_type"] == "agroprocessing":
 
     print(work_days_dict_AP)                                        # Working days (agroprocessing)
 
+# Get the parameters - Monthly revenues (Business)
+rev_B = {}
+
+if first_survey["G_0/respondent_type"] == "business":
+    rev_week = float(first_survey["B_4b/bus_rev_lastweek"]) * 4
+    rev_month = float(first_survey["B_4b/bus_rev_lastmonth"])
+
+    rev_B["business monthly revenues"] = {
+        "weekly revenues * 4" : rev_week,
+        "monthly revenues" : rev_month
+    }
+print(rev_B)
+
+# Get the parameters - Monthly revenues (Household)
+sav_H = {}
+
+total_saving_usd = 0
+total_saving_local = 0
+
+if first_survey["G_0/respondent_type"] == "household":
+    for key, data in first_survey.items():
+        if "H_3" in key and "_name_H" in key :
+            saving_name = key.replace("H_3","", 1).replace("_name_H","",1)
+            saving_usd = float(first_survey["H_3"+saving_name+"_amount_USD_H"])
+            saving_local = float(first_survey["H_3"+saving_name+"_amount_local_H"])
+
+            total_saving_usd += saving_usd
+            total_saving_local += saving_local
+
+    print(total_saving_usd)
+    print(total_saving_local)
+
+# Get the parameters - Monthly revenues (agro-processing)
+rev_AP = {}
+
+if first_survey["G_0/respondent_type"] == "agroprocessing":
+    rev_week = float(first_survey["B_4b/bus_prof_lastweek_AP"]) * 4
+    rev_month = float(first_survey["B_4b/bus_rev_lastmonth_AP"])
+
+    rev_AP["agroprocessing monthly revenues"] = {
+        "weekly revenues * 4" : rev_week,
+        "monthly revenues" : rev_month
+    }
+    print(rev_AP)
 
 # Get the parameters - Electrical appliances (Business)
 app_dict_B = {}
@@ -71,7 +118,7 @@ if first_survey["G_0/respondent_type"] == "business":
                 "power" : float(power),                             # appliance power in W
                 "value" : float(value),                             # appliance value
                 "usage_time": float(hour)*60,                       # appliance operating usage time in min
-                "time_window" : usage_wd_dict                       # appliance usage windows
+                "time_window" : convert_usage_windows(usage_wd_dict)                       # appliance usage windows
             }
 
 
@@ -103,7 +150,7 @@ if first_survey["G_0/respondent_type"] == "household":
                 "power" : float(power),                                     # appliance power in W
                 "value" : float(value),                                     # appliance value
                 "usage_time": float(hour)*60,                               # appliance operating usage time in min
-                "time_window" : usage_wd_dict                               # appliance usage windows
+                "time_window" : convert_usage_windows(usage_wd_dict)                               # appliance usage windows
             }
 
     print(app_dict_H)
@@ -150,7 +197,7 @@ if first_survey["G_0/respondent_type"] == "business":
             "bag": kg_bag,                                      # kg per unit of fuel
             "quantity": quantity,                               # quantity of unit consumption in the time window
             "price": price,                                     # price per unit
-            "fuel_amount": daily_cons                           # daily fuel consumption
+            "fuel_amount": daily_cons                           # daily fuel consumption [kg]
         }
 
     print(cook_dict_B)
@@ -180,7 +227,7 @@ if first_survey["G_0/respondent_type"] == "business":
             "meal_week" : float(week),                              # number of meals per week
             "meal_fuel" : fuel,                                     # fuel used for meals
             "meal_stove" : cooking_device,                          # stove used for meals
-            "meal_usage_time" : meal_usage_time                     # meals time window
+            "meal_usage_time" : convert_usage_windows(meal_usage_time)                     # meals time window
             }
 
     print(meal_dict_B)
@@ -255,7 +302,7 @@ if first_survey["G_0/respondent_type"] == "household":
             "meal_week" : float(week),                              # number of meals per week
             "meal_fuel" : fuel,                                     # fuel used for meals
             "meal_stove" : cooking_device,                          # stove used for meals
-            "meal_usage_time" : meal_usage_time                     # meals time window
+            "meal_usage_time" : convert_usage_windows(meal_usage_time)                     # meals time window
             }
 
     print(meal_dict_H)
@@ -288,7 +335,7 @@ if first_survey["G_0/respondent_type"] == "business":
 
     drinking_water_dict_B["drinking_water_B"] = {
         "daily_demand" : consume,                                   # daily drinking water demand
-        "water_window" : drink_usage_time                           # drinking water usage window
+        "water_window" : convert_usage_windows(drink_usage_time)                           # drinking water usage window
     }
 
     print(drinking_water_dict_B)
@@ -321,7 +368,7 @@ if first_survey["G_0/respondent_type"] == "household":
 
     drinking_water_dict_H["drinking_water_H"] = {
         "daily_demand" : consume,                               # daily drinking water demand
-        "water_window" : drink_usage_time                       # drinking water usage window
+        "water_window" : convert_usage_windows(drink_usage_time)                       # drinking water usage window
     }
 
     print(drinking_water_dict_H)
@@ -355,7 +402,7 @@ if first_survey["G_0/respondent_type"] == "business":
 
     service_water_dict_B["service_water_business"] = {
         "daily_demand": consume_serv,
-        "water_window": service_usage_time
+        "water_window": convert_usage_windows(service_usage_time)
     }
 
     print(service_water_dict_B)
@@ -417,8 +464,8 @@ if first_survey["G_0/respondent_type"] == "household":
 
     irrigation_water_dict_H["irrigation_water_household"] = {
         "daily_demand": season_dict,                                # irrigation water demand of typical day for each month
-        "irr_window_dry": dry_irr_usage_time,                       # irrigation water time window (dry season)
-        "irr_window_rainy" : rainy_irr_usage_time                   # irrigation water time window (rainy season)
+        "irr_window_dry": convert_usage_windows(dry_irr_usage_time),                       # irrigation water time window (dry season)
+        "irr_window_rainy" : convert_usage_windows(rainy_irr_usage_time)                   # irrigation water time window (rainy season)
     }
 
     print(irrigation_water_dict_H)
@@ -478,8 +525,8 @@ if first_survey["G_0/respondent_type"] == "household":
 
     animal_water_dict_H["animal_water_household"] = {
         "daily_demand": season_dict_animal,                             # animal water demand of typical day for each month
-        "irr_window_dry": dry_animal_usage_time,                        # animal water time window (dry season)
-        "irr_window_rainy" : rainy_animal_usage_time                    # animal water time window (rainy season)
+        "animal_window_dry": convert_usage_windows(dry_animal_usage_time),                        # animal water time window (dry season)
+        "animal_window_rainy" : convert_usage_windows(rainy_animal_usage_time)                    # animal water time window (rainy season)
     }
 
     print(animal_water_dict_H)
@@ -533,8 +580,8 @@ if first_survey["G_0/respondent_type"] == "agroprocessing":
                 "crop_processed_per_fuel": float(product),              # crop processed [kg] per unit of fuel
                 "throughput": float(efficiency),                        # [kg] of crop processed per [h] of machine operation
                 "usage_time": float(hour_AP) * 60,                      # machine operating usage time in min
-                "time_window": usage_AP_dict,                           # machine usage windows
-                "crop_processed_per_day" : months_AP                    # crop processed on a typical working day for each months
+                "time_window": convert_usage_windows(usage_AP_dict),                           # machine usage windows
+                "crop_processed_per_day": months_AP                    # crop processed on a typical working day for each months
             }
 
     print(agroproc_dict)
