@@ -66,14 +66,21 @@ total_saving_local = 0
 
 if first_survey["G_0/respondent_type"] == "household":
     for key, data in first_survey.items():
-        if "H_3" in key and "_name_H" in key :
-            saving_name = key.replace("H_3","", 1).replace("_name_H","",1)
-            saving_usd = float(first_survey["H_3"+saving_name+"_amount_USD_H"])
-            saving_local = float(first_survey["H_3"+saving_name+"_amount_local_H"])
+        if "H_3" in key and "_currency_H" in key :
+            saving_name = key.replace("H_3","", 1).replace("_currency_H","",1)
+            try:
+                saving_usd = float(first_survey["H_3" + saving_name + "_amount_USD_H"])
+            except KeyError:
+                saving_usd = 0.0
+
+            try:
+                saving_local = float(first_survey["H_3" + saving_name + "_amount_local_H"])
+            except KeyError:
+                saving_local = 0.0
 
             total_saving_usd += saving_usd
-            total_saving_local += saving_local
-    total_saving = total_saving_usd + (total_saving_local*exc_rate)
+            total_saving_local += saving_local * exc_rate
+            total_saving = total_saving_usd + total_saving_local
 
 
 # Get the parameters - Monthly revenues (agro-processing)
@@ -165,21 +172,24 @@ if first_survey["G_0/respondent_type"] == "business":
                 if unit == "kilogram" :
                     daily_cons = quantity
                 elif unit == "liter" :
-                    daily_cons = quantity                      # to be multiplied by density (by user)
+                    fuel_density = density_dict[fuel + "_density"]
+                    daily_cons = quantity * fuel_density
                 elif unit == "bag" or unit == "cylinder":
                     daily_cons = quantity * kg_bag
             if time_cons == "weekly" :
                 if unit == "kilogram" :
                     daily_cons = quantity/7
                 elif unit == "liter" :
-                    daily_cons = quantity/7                    # to be multiplied by density (by user)
+                    fuel_density = density_dict[fuel + "_density"]
+                    daily_cons = quantity * fuel_density/7
                 elif unit == "bag" or unit == "cylinder":
                     daily_cons = quantity * kg_bag/7
             if time_cons == "monthly" :
                 if unit == "kilogram" :
                     daily_cons = quantity/30
                 elif unit == "liter" :
-                    daily_cons = quantity/30                   # to be multiplied by density (by user)
+                    fuel_density = density_dict[fuel + "_density"]
+                    daily_cons = quantity * fuel_density/30
                 elif unit == "bag" or unit == "cylinder":
                     daily_cons = quantity * kg_bag/30
 
@@ -234,28 +244,34 @@ if first_survey["G_0/respondent_type"] == "household":
             kg_bag = float(first_survey ["H_18"+fuel_name+"_bag_H"])
             quantity = float(first_survey["H_18"+fuel_name+"_amount_H"])
             price = float(first_survey["H_18"+fuel_name+"_cost_H"])
+            fuel = fuel_name[2:]
+
 
             if time_cons == "daily" :
                 if unit == "kilogram" :
                     daily_cons = quantity
                 elif unit == "liter" :
-                    daily_cons = quantity                      # to be multiplied by density (by user)
+                    fuel_density = density_dict[fuel + "_density"]
+                    daily_cons = quantity * fuel_density
                 elif unit == "bag" or unit == "cylinder":
                     daily_cons = quantity * kg_bag
             if time_cons == "weekly" :
                 if unit == "kilogram" :
                     daily_cons = quantity/7
                 elif unit == "liter" :
-                    daily_cons = quantity/7                    # to be multiplied by density (by user)
+                    fuel_density = density_dict[fuel + "_density"]
+                    daily_cons = quantity * fuel_density/7
                 elif unit == "bag" or unit == "cylinder":
                     daily_cons = quantity * kg_bag/7
             if time_cons == "monthly" :
                 if unit == "kilogram" :
                     daily_cons = quantity/30
                 elif unit == "liter" :
-                    daily_cons = quantity/30                   # to be multiplied by density (by user)
+                    fuel_density = density_dict[fuel + "_density"]
+                    daily_cons = quantity * fuel_density/30
                 elif unit == "bag" or unit == "cylinder":
                     daily_cons = quantity * kg_bag/30
+
 
             cook_dict_H[fuel_name] = {
             "time": time_cons,                                  # time window to express fuel consumption
@@ -512,7 +528,6 @@ if first_survey["G_0/respondent_type"] == "household":
         "animal_window_dry": convert_usage_windows(dry_animal_usage_time),                        # animal water time window (dry season)
         "animal_window_rainy" : convert_usage_windows(rainy_animal_usage_time)                    # animal water time window (rainy season)
     }
-
 
 
 # Get the parameters - Agro processing demand (Agroprocessing)
