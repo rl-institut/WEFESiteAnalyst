@@ -30,9 +30,28 @@ appliances = [
     }
 ]
 
-users = RelationalDf('users', 'users', 'id', pd.DataFrame(users))
-appliances = RelationalDf('appliances', 'appliances', 'id', pd.DataFrame(appliances))
+usage_windows = [
+    {
+        'id': 1,
+        'appliance_id': 1,
+        'start': 14,
+        'end': 16
+    },
+    {
+        'id': 2,
+        'appliance_id': 1,
+        'start': 20,
+        'end': 24
+    }
+]
+
+
+
+users = RelationalDf('users', 'users', pd.DataFrame(users))
+appliances = RelationalDf('appliances', 'appliances',  pd.DataFrame(appliances))
+usage_windows = RelationalDf('usage_windows', 'usage_windows',  pd.DataFrame(usage_windows))
 users.add_child_table(appliances, 'user_id')
+appliances.add_child_table(usage_windows, 'appliance_id')
 
 first_table = users
-display_tables = {users.table_id: users, appliances.table_id: appliances}
+display_tables_dict = {users.table_id: users, appliances.table_id: appliances, usage_windows.table_id: usage_windows}
