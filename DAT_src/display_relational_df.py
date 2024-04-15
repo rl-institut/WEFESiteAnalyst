@@ -2,8 +2,15 @@
 from dash import Dash, ALL, dcc, html, Input, Output, dash_table, no_update, ctx, MATCH
 import dash_bootstrap_components as dbc
 
+import pandas as pd
+pd.options.mode.chained_assignment = None  # default='warn'
+
+import logging, sys
+
+logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
+
 # Initialize app
-app = Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = Dash(__name__,external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 @app.callback(
     [
@@ -13,18 +20,20 @@ app = Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
     [
         Input({'type': 'table', 'table_id': ALL, 'table_number': ALL}, "active_cell"),
         Input({'type': 'close_table_button', 'table_id': ALL, 'table_number': ALL}, 'n_clicks'),
+        Input({'type': 'add_row_button', 'table_id': ALL, 'table_number': ALL}, 'n_clicks'),
         Input('displayed_tables', 'data'),
         Input('app_wrapper', 'children')
     ],
     prevent_initial_call=True
 
 )
-def update_tables(active_cell, close_table_button_clicks,displayed_tables_list, current_tables_view):
+def update_tables(active_cell, close_table_button_clicks, add_row_button_clicks, displayed_tables_list, current_tables_view):
     """
     Callback function to run when a cell of a table is clicked
 
     :param active_cell:
-    :param close_button_table_button_clicks:
+    :param close_table_button_clicks:
+    :param add_row_button_clicks:
     :param displayed_tables_list:
     :param current_tables_view:
     :return:
@@ -40,31 +49,36 @@ def update_tables(active_cell, close_table_button_clicks,displayed_tables_list, 
 
     if element_clicked['type'] == 'table':
         # Run table cell clicked actions
-        print('table cell clicked')
+        logging.debug('Table cell clicked')
         return table_cell_clicked(active_cell, displayed_tables_list, current_tables_view)
-
     elif element_clicked['type'] == 'close_table_button':
         # Run close table button clicked actions
-        print('close table button clicked')
+        logging.debug('Close table button clicked')
         return close_table_button_clicked(close_table_button_clicks, displayed_tables_list, current_tables_view)
+    elif element_clicked['type'] == 'add_row_button':
+        logging.debug('Add row button clicked')
+        return add_table_row(add_row_button_clicks, displayed_tables_list, current_tables_view)
 
 
-def table_cell_clicked(active_cell, displayed_tables_list, current_tables_view):
+
+def table_cell_clicked(active_cell, displayed_tables, current_tables_view):
     table_clicked = ctx.triggered_id
 
     # Abort if there is no active cell or no table clicked
     if not active_cell:
         return no_update
 
-    print(active_cell)
     # Check if the clicked column is child column and contains sub-data
     if active_cell[table_clicked['table_number']]['column_id'].startswith('!child_'):
+        # Reset active cell to invisible cell
+        reset_active_cell = [{'row': 0, 'column': 'cant_see', 'column_id': 'cant_see', 'row_id': 0}]
+
         # Get child_table_id from the clicked column
         child_table_id = active_cell[table_clicked['table_number']]['column_id'][7:]
 
         # Check if this table is already displayed
-        if child_table_id not in displayed_tables_list:
-            print('Add new table')
+        if child_table_id not in displayed_tables:
+            logging.debug('Add new table')
 
             # Generate new table to display
             new_table = display_table(
@@ -78,27 +92,71 @@ def table_cell_clicked(active_cell, displayed_tables_list, current_tables_view):
             # Add new table to App view
             current_tables_view.append(new_table)
 
-            # Add id of new table to list of displayed tables
-            displayed_tables_list.append(child_table_id)
+            # Add to dict of displayed tables
+            displayed_tables[child_table_id] = active_cell[table_clicked['table_number']]['row_id']
         else:
-            print('Table is already displayed')
-            # Update displayed table with new query
+            logging.debug('Table is already displayed')
+            # Check if already displayed table has the same query_id
+            if displayed_tables.get(child_table_id) == active_cell[table_clicked['table_number']]['row_id']:
+                logging.debug('Same query ID')  # Do nothing
+            else:
+                logging.debug('New query ID')
+                # Close the displayed table and all tables below
+                # Get position of first table to close
+                position = list(displayed_tables).index(child_table_id)
 
-    # return list of displayed tables and updated view (HTML) if currently displayed tables and None for active cell
-    return displayed_tables_list, current_tables_view
+                # Remove table and all following from the dict of displayed tables
+                displayed_tables = dict(list(displayed_tables.items())[0:position])
 
-def close_table_button_clicked(n, displayed_tables_list, current_tables_view):
-    print('Button clicked:')
-    print(ctx.triggered_id)
+                # Remove table and all following tables from the tables view
+                current_tables_view = current_tables_view[0:position]
+
+                # Add new table with new query_id
+                new_table = display_table(
+                    relational_df=display_tables_dict[table_clicked['table_id']].child_tables[child_table_id],
+                    table_number=len(current_tables_view),  # position of new table is at the end of current tables view
+                    query_col=display_tables_dict[table_clicked['table_id']].
+                    child_tables[child_table_id].parent_tables[table_clicked['table_id']][1],
+                    query_id=active_cell[table_clicked['table_number']]['row_id']
+                )
+
+                # Add new table to App view
+                current_tables_view.append(new_table)
+
+                # Add to dict of displayed tables
+                displayed_tables[child_table_id] = active_cell[table_clicked['table_number']]['row_id']
+
+    # Return dict of displayed tables and updated view (HTML) if currently displayed tables and None for active cell
+    return displayed_tables, current_tables_view
+
+
+def close_table_button_clicked(n, displayed_tables, current_tables_view):
+    logging.debug('Button clicked:')
+    logging.debug(ctx.triggered_id)
 
     button_clicked = ctx.triggered_id
-    # Remove this close button's corresponding table from displayed_tables_list
-    displayed_tables_list = displayed_tables_list[0:button_clicked['table_number']]
+    # Remove this close button's corresponding table and all following from the dict of displayed tables
+    displayed_tables = dict(list(displayed_tables.items())[0:button_clicked['table_number']])
 
-    # Remove this close button's corresponding table and a
+    # Remove this close button's corresponding table and all following tables from the tables view
     current_tables_view = current_tables_view[0:button_clicked['table_number']]
 
-    return displayed_tables_list, current_tables_view
+    return displayed_tables, current_tables_view
+
+
+def add_table_row(n, displayed_tables, current_tables_view):
+    logging.debug('Add table row button clicked:')
+    logging.debug(ctx.triggered_id)
+    button_clicked = ctx.triggered_id
+
+    # Get table to add row to
+    table_to_edit = current_tables_view[button_clicked['table_number']]
+
+    # Generate ID of new element to add -> must be unique! -> current max id +1
+    new_element_id = display_tables_dict[button_clicked['table_id']].df['id'].max()+1
+
+    return displayed_tables, current_tables_view
+
 
 
 def display_table(relational_df, table_number, query_col=None, query_id=None):
@@ -152,12 +210,17 @@ def display_table(relational_df, table_number, query_col=None, query_id=None):
              }
         )  # Column ID is identifier + child_table id
         # Add columns for child_tables of df to display
-        df["!child_"+str(child_table_id)] = 'Click me!'
+        df.loc[:, "!child_"+str(child_table_id)] = 'Click me!'
         # Collect names of added columns in list (to drop later)
         child_table_column_names.append("!child_"+str(child_table_id))
 
     # Add original and custom created child_table columns
     columns = original_columns + child_table_columns
+
+    # Add invisible column to allow for active_cell deselect
+    # https://stackoverflow.com/a/67924533/4351433
+    columns = [{'name': 'cant_see', 'id': 'cant_see'}] + columns
+    df.insert(0, 'cant_see', ['' for i in df.iloc[:, 0]])
 
     # Generate dash datatable object
     table = dash_table.DataTable(
@@ -167,7 +230,13 @@ def display_table(relational_df, table_number, query_col=None, query_id=None):
         page_size=10,
         sort_action="native",
         active_cell=None,
-        editable=True
+        editable=True,
+        style_data_conditional=[
+            {'if': {'column_id': 'cant_see', }, 'display': 'None', }
+        ],
+        style_header_conditional=[
+            {'if': {'column_id': 'cant_see', }, 'display': 'None', }
+        ],
     ),
 
     # Create new row to add to app HTML layout
@@ -190,6 +259,11 @@ def display_table(relational_df, table_number, query_col=None, query_id=None):
                                 'type': 'close_table_button',
                                 "table_id": relational_df.table_id,
                                 "table_number": table_number
+                            }) if table_number !=0 else None,  # don't display close button for first table
+                            dbc.Button('Add row', id={
+                                'type': 'add_row_button',
+                                "table_id": relational_df.table_id,
+                                'table_number': table_number
                             })
                         ],
                         width=1)
@@ -207,13 +281,14 @@ from data_analysis_test import first_table  # first table to be displayed
 # Initialize layout (with users table)
 app.layout = html.Div(
     [
-        # Save ID of first displayed table for position 1
-        dcc.Store(id='displayed_tables', data=[first_table.table_id]),
+        # Save ID of first displayed table for position
+        # dict: {table_id: 'query_id'}
+        dcc.Store(id='displayed_tables', data={first_table.table_id: None}),
         # Add first displayed table to app_wrapper
         html.Div([display_table(first_table, 0)], id='app_wrapper')
     ]
 )
 
 if __name__ == '__main__':
-    app.run_server(debug=True, port=8052)
-    print('done')
+    app.run_server(debug=False, port=8052)
+    logging.debug('App running')
