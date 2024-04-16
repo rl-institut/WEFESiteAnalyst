@@ -1,39 +1,25 @@
-from dash import Dash, dcc, html, Input, Output, ALL, Patch, callback
+#%%
+from helpers.plotting import plotly_high_res_df
 
-app = Dash(__name__)
+import pandas as pd
+import numpy as np
+from datetime import datetime, timedelta
 
-app.layout = html.Div(
-    [
-        html.Button("Add Filter", id="add-filter-btn", n_clicks=0),
-        html.Div(id="dropdown-container-div", children=[]),
-        html.Div(id="dropdown-container-output-div"),
-    ]
-)
+# Get the current date and time
+date_today = datetime.now()
 
+# Generate a range of dates at minute intervals for the next 7 days
+days = pd.date_range(date_today, date_today + timedelta(7), freq='T')
 
-@callback(
-    Output("dropdown-container-div", "children"), Input("add-filter-btn", "n_clicks")
-)
-def display_dropdowns(n_clicks):
-    patched_children = Patch()
-    new_dropdown = dcc.Dropdown(
-        ["NYC", "MTL", "LA", "TOKYO"],
-        id={"type": "city-filter-dropdown", "index": n_clicks},
-    )
-    patched_children.append(new_dropdown)
-    return patched_children
+# Generate random data for the 'test' column
+np.random.seed(seed=1111)
+data = np.random.randint(1, high=100, size=len(days))
 
+# Create the DataFrame
+df = pd.DataFrame({'test': days, 'col2': data})
 
-@callback(
-    Output("dropdown-container-output-div", "children"),
-    Input({"type": "city-filter-dropdown", "index": ALL}, "value"),
-)
-def display_output(values):
-    print(values)
-    return html.Div(
-        [html.Div(f"Dropdown {i + 1} = {value}") for (i, value) in enumerate(values)]
-    )
+# Set the datetime index
+df = df.set_index('test')
 
-
-if __name__ == "__main__":
-    app.run(debug=True)
+# Print the resulting DataFrame
+df_resampled = df.resample('h').mean()

@@ -1,6 +1,5 @@
-from relational_df import RelationalDf
+from data_analysis.relational_df import RelationalDf
 import pandas as pd
-from dash import Dash, dcc, html, Input, Output, dash_table, no_update
 
 users = [
     {

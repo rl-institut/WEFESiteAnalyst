@@ -1,7 +1,3 @@
-from pandas import DataFrame
-from dash import Dash, dcc, html, Input, Output, dash_table, no_update, callback
-
-
 class RelationalDf:
     def __init__(self, table_id, table_name, df):
 

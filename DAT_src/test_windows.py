@@ -1,6 +1,6 @@
 #%%
 from kobo_api_access import load_kobo_data
-import defaults
+from input import defaults
 from copy import copy
 
 # Load survey data from Kobo and get only dict (position 0)

@@ -2,10 +2,9 @@ import ramp
 import pandas as pd
 import numpy as np
 import copy
-from time import perf_counter
 from tqdm import tqdm
 
-from exceptions import MissingInput
+from helpers.exceptions import MissingInput
 
 
 class RampControl:
@@ -39,6 +38,9 @@ class RampControl:
 
             # Calculate peak time range of this use case
             peak_time_range = use_case.calc_peak_time_range()
+
+            if len(peak_time_range) == 0:
+                print('Alert')
 
             # Loop through all days of this month's use_case
 
