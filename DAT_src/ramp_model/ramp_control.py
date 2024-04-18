@@ -39,9 +39,6 @@ class RampControl:
             # Calculate peak time range of this use case
             peak_time_range = use_case.calc_peak_time_range()
 
-            if len(peak_time_range) == 0:
-                print('Alert')
-
             # Loop through all days of this month's use_case
 
             for day in self.days_timeseries[self.days_timeseries.month == use_case_month]:

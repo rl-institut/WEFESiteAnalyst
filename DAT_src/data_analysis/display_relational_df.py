@@ -61,7 +61,14 @@ def update_tables(active_cell,
     if element_clicked['type'] == 'table':
         # Run table cell clicked actions
         logging.debug('Table cell clicked')
+        # Abort if there is no active cell or no table clicked
+        if active_cell[0] is None:
+            return no_update
+
+        test = table_cell_clicked(active_cell, displayed_tables_list, current_tables_view) + (displayed_tables_data,)
+
         return table_cell_clicked(active_cell, displayed_tables_list, current_tables_view) + (displayed_tables_data,)
+
     elif element_clicked['type'] == 'close_table_button':
         # Run close table button clicked actions
         logging.debug('Close table button clicked')
@@ -76,14 +83,9 @@ def update_tables(active_cell,
 def table_cell_clicked(active_cell, displayed_tables, current_tables_view):
     table_clicked = ctx.triggered_id
 
-    # Abort if there is no active cell or no table clicked
-    if not active_cell:
-        return no_update
-
     # Check if the clicked column is child column and contains sub-data
     if active_cell[table_clicked['table_number']]['column_id'].startswith('!child_'):
         # Reset active cell to invisible cell
-        reset_active_cell = [{'row': 0, 'column': 'cant_see', 'column_id': 'cant_see', 'row_id': 0}]
 
         # Get child_table_id from the clicked column
         child_table_id = active_cell[table_clicked['table_number']]['column_id'][7:]
@@ -175,6 +177,7 @@ def add_table_row(n, displayed_tables_data, displayed_tables_columns, displayed_
             new_row[col['id']] = 'Click me! (added)'
         elif col['id'] == 'id':  # for element id column
             # Generate ID of new element to add -> must be unique! -> current max id +1
+            #TODO
             new_row[col['id']] = display_tables_dict[button_clicked['table_id']].df['id'].max() + 1
         elif col['id'] == displayed_tables[button_clicked['table_id']][0]:  # for query_col
             # Enter query_id
@@ -239,16 +242,11 @@ def display_table(relational_df, table_number, query_col=None, query_id=None):
              }
         )  # Column ID is identifier + child_table id
         # Add "button text" to display in the button column
-        if len(df.index)>0:  # only if the table to display is not empty
+        if len(df.index) > 0:  # only if the table to display is not empty
             df.loc[:, "!child_"+str(child_table_id)] = 'Click me!'
 
     # Add original and custom created child_table columns
     columns = original_columns + child_table_columns
-
-    # Add invisible column to allow for active_cell deselect
-    # https://stackoverflow.com/a/67924533/4351433
-    columns = [{'name': 'cant_see', 'id': 'cant_see'}] + columns
-    df.insert(0, 'cant_see', ['' for i in df.iloc[:, 0]])
 
     # Generate dash datatable object
     table = dash_table.DataTable(
@@ -259,12 +257,13 @@ def display_table(relational_df, table_number, query_col=None, query_id=None):
         sort_action="native",
         active_cell=None,
         editable=True,
-        style_data_conditional=[
-            {'if': {'column_id': 'cant_see', }, 'display': 'None', }
-        ],
-        style_header_conditional=[
-            {'if': {'column_id': 'cant_see', }, 'display': 'None', }
-        ],
+        filter_action="native",
+        sort_mode='multi',
+        row_selectable='multi',
+        row_deletable=True,
+        selected_rows=[],
+        page_action='native',
+        page_current=0,
     ),
 
     # Create new row to add to app HTML layout
