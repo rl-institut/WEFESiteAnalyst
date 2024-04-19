@@ -188,15 +188,14 @@ def close_table():
 
     return output_dict
 
-
-"""@app.callback(
+@app.callback(
     Output({'type': 'table', 'table_id': MATCH, 'table_number': MATCH}, 'data'),
     Input({'type': 'add_row_button', 'table_id': MATCH, 'table_number': MATCH}, 'n_clicks'),
     State({'type': 'table', 'table_id': MATCH, 'table_number': MATCH}, 'data'),
     State({'type': 'table', 'table_id': MATCH, 'table_number': MATCH}, 'columns'),
     State({'type': 'table', 'table_id': MATCH, 'table_number': MATCH}, 'filter_query'),
     prevent_initial_call=True
-)"""
+)
 def add_table_row(clicks, table_data, table_columns, table_filter_query):
     logging.debug('Add table row button clicked:')
 
