@@ -1,7 +1,4 @@
-def test_a():
-    return [10, 20]
+#%% Example string
+my_string = "{!fk_user_id}=123"
 
-def test_b(b):
-    return b
 
-print(test_b(test_a()))

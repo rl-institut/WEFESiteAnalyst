@@ -94,9 +94,7 @@ function_output_dict = {key: no_update for key in callback_output_dict.keys()}
     ],
     prevent_initial_call=True
 )
-def update_tables(active_cell,
-                  close_table_button_clicks
-                  ):
+def update_tables(active_cell, close_table_button_clicks):
     """
     Callback function to display new table with new query or closing table
 
@@ -165,7 +163,7 @@ def table_cell_clicked(active_cell):
 
 
         # Update query property of child table in output_dict -> query for corresponding item
-        output_dict[f'filter_query_table_{child_table_id}'] = f'{{{query_col}}} ={query_id}'
+        output_dict[f'filter_query_table_{child_table_id}'] = f'{{!fk_{query_col}}}={query_id}'
 
         #print(f' Callback returns: {output_dict}')
         # Return dict of displayed tables and updated view (HTML) if currently displayed tables and None for active cell
@@ -211,8 +209,16 @@ def add_table_row(clicks, table_data, table_columns, table_filter_query):
             # Generate ID of new element to add -> must be unique! -> current max id +1
             new_row[col['id']] = table_df['id'].max() + 1
         elif col['id'].startswith('!fk_'):  # if column is query column
-            # Enter query_id
-            new_row[col['id']] = table_filter_query  # value is set query_id
+            # Extract part of table query of this column -> exists only once get first list item
+            query = [k for k in table_filter_query.split("&&") if col['id'] in k][0]
+            # Find the index of the equal sign
+            index = query.find('=')
+
+            if index == -1:  # if no equal sign is found
+                new_row[col['id']] = ""  # no value is set in this column
+                # TODO: fk_column is currently not editable -> user would not be able to provide fk_id
+            else:
+                new_row[col['id']] = int(query[index + 1:])  # value is set to be the fk_id of the current query
         else:
             new_row[col['id']] = ""
 
@@ -236,6 +242,8 @@ def load_tables(tables_dict):
         # Create copy of the dataframe
         df = table_relational_df.df.copy()
 
+        # TODO give ability to define column display names -> to be displayed to user and not equal to actual df columns
+
         # Get this relational_df's foreign key columns -> to not display them
         foreign_key_columns = []
         for parent_table in table_relational_df.parent_tables.values():
@@ -256,6 +264,9 @@ def load_tables(tables_dict):
                 original_columns.append(
                     {"name": c, "id": c, "editable": True}  # ...is editable
                 )
+
+        # Add !fk prefix to df foreign key columns to oad data correctly
+        df = df.rename(columns={c: '!fk_' + c for c in df.columns if c in foreign_key_columns})
 
         # Create new "button" column for this table -> to link to child tables
         child_table_columns = []
