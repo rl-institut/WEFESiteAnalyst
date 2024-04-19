@@ -3,19 +3,20 @@ Complete UI for data_analysis of DAT
 
 """
 
-from dash import Dash, ALL, dcc, html, Input, Output, State, dash_table, no_update, ctx
+from dash import Dash, ALL, dcc, html, Input, Output, State, dash_table, no_update, ctx, Patch
 import dash_bootstrap_components as dbc
 
 import pandas as pd
+
 pd.options.mode.chained_assignment = None  # default='warn'
+from copy import deepcopy
 
 import logging, sys
 
 logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 
 # Initialize app
-app = Dash(__name__,external_stylesheets=[dbc.themes.BOOTSTRAP])
-
+app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 """
 Input:
@@ -64,30 +65,52 @@ Input:
     o creat filesystem for version control...
 """
 
+from data_analysis.data_analysis_test import display_tables_dict  # dict containing all tables to be displayed
+
+# Dynamically create dict of callback outputs for all tables
+# Necessary because Dash pattern matching callback with "ALL" (updating all tables on every callback) breaks active cell
+callback_output_dict = {}
+# Loop through each table to display
+i = 0
+for table_id, table in display_tables_dict.items():
+    callback_output_dict[f'style_table_row_{table_id}'] = Output({'type': 'table_row_wrapper', 'table_id': table_id},
+                                                                 'style')
+    callback_output_dict[f'filter_query_table_{table_id}'] = Output({'type': 'table', 'table_id': table_id,
+                                                                    'table_number': i}, 'filter_query')
+    i += 1
+
+# Prepare output dict with identical keys and all values set to no_update to be used in callback
+function_output_dict = {key: no_update for key in callback_output_dict.keys()}
+
 @app.callback(
     # List of tables in view
-    Output('app_wrapper', 'children', allow_duplicate=True),
-    # Active cell of the tables in view
-    Input({'type': 'table', 'table_id': ALL, 'table_number': ALL}, "active_cell"),
-    # Clicked "close_table" button
-    Input({'type': 'close_table_button', 'table_id': ALL, 'table_number': ALL}, 'n_clicks'),
-    # Clicked "add_row" button
-    Input({'type': 'add_row_button', 'table_id': ALL, 'table_number': ALL}, 'n_clicks'),
-    # Data of displayed tables
-    State({'type': 'table', 'table_id': ALL, 'table_number': ALL}, 'data'),
-    # Columns of displayed tables
-    State({'type': 'table', 'table_id': ALL, 'table_number': ALL}, 'columns'),
-    # Current list of tables in view
-    State('app_wrapper', 'children'),
+    output=callback_output_dict,
+    inputs=[
+        # Active cell of the tables in view
+        Input({'type': 'table', 'table_id': ALL, 'table_number': ALL}, "active_cell"),
+        # Clicked "close_table" button
+        Input({'type': 'close_table_button', 'table_id': ALL, 'table_number': ALL}, 'n_clicks'),
+        # Clicked "add_row" button
+        Input({'type': 'add_row_button', 'table_id': ALL, 'table_number': ALL}, 'n_clicks'),
+        # Data of displayed tables
+        State({'type': 'table', 'table_id': ALL, 'table_number': ALL}, 'data'),
+        # Columns of displayed tables
+        State({'type': 'table', 'table_id': ALL, 'table_number': ALL}, 'columns'),
+        # Current filter queries in each table
+        State({'type': 'table', 'table_id': ALL, 'table_number': ALL}, "filter_query"),
+        # Current visibility of the table rows
+        State({'type': 'table_row_wrapper', 'table_id': ALL}, 'style')
+    ],
     prevent_initial_call=True
-
 )
 def update_tables(active_cell,
                   close_table_button_clicks,
                   add_row_button_clicks,
-                  displayed_tables_data,
-                  displayed_tables_columns,
-                  current_tables_view):
+                  tables_data,
+                  tables_columns,
+                  tables_filter_queries,
+                  table_rows_style
+                  ):
     """
     Callback function to run when any button related to an individual table or a table cell is clicked.
 
@@ -116,7 +139,7 @@ def update_tables(active_cell,
         if active_cell[0] is None:
             return no_update
 
-        return table_cell_clicked(active_cell, current_tables_view)
+        return table_cell_clicked(active_cell, table_rows_style, tables_filter_queries)
 
     elif element_clicked['type'] == 'close_table_button':
         # Run close table button clicked actions
@@ -129,31 +152,36 @@ def update_tables(active_cell,
         #                     displayed_tables_list, current_tables_view)
 
 
-def table_cell_clicked(active_cell, current_tables_view):
+def table_cell_clicked(active_cell, table_rows_style, table_filter_queries):
     table_clicked = ctx.triggered_id
+    print(f'table clicked: {table_clicked["table_number"]}')
 
     # Check if the clicked column is child column and contains sub-data
     if active_cell[table_clicked['table_number']]['column_id'].startswith('!child_'):
 
+        # Make deepcopy of prepared function_output_dict
+        output_dict = deepcopy(function_output_dict)
+
         # Get child_table_id from the clicked column
         child_table_id = active_cell[table_clicked['table_number']]['column_id'][7:]
+
+        # Update visibility this table in output_dict
+        output_dict[f'style_table_row_{child_table_id}'] = {'display': 'block'}
 
         # Get the corresponding query_col of the child table
         query_col = display_tables_dict[table_clicked['table_id']].child_tables[child_table_id].parent_tables[
             table_clicked['table_id']][1]
-        # Get corresponding query_id
+        # Get corresponding query_i
         query_id = active_cell[table_clicked['table_number']]['row_id']
 
-        # Find corresponding child_table in list of current_tables_view
-        for table_row in current_tables_view:
-            if table_row['props']['id'] == child_table_id:
-                # Make this child_table visible
-                table_row['props']['style']['display'] = 'block'
-                # Set the child_tables filter in "id" column to query_id
-                table_object = table_row['props']['children'][1]['props']['children'][0]['props']['children'][0]
+        output_dict[f'filter_query_table_{child_table_id}'] = f'{{{query_col}}} ={query_id}'
 
-    # Return dict of displayed tables and updated view (HTML) if currently displayed tables and None for active cell
-    return current_tables_view
+        print(f' Callback returns: {output_dict}')
+        # Return dict of displayed tables and updated view (HTML) if currently displayed tables and None for active cell
+        return output_dict
+    else:
+        return no_update
+
 
 def load_tables(tables_dict):
     """
@@ -234,7 +262,6 @@ def load_tables(tables_dict):
         header = table_relational_df.table_name
 
         # Make only first table visible on load
-
         display = 'block' if table_number == 0 else 'none'
 
         new_table_row = html.Div(
@@ -259,17 +286,15 @@ def load_tables(tables_dict):
                             width=1)
                     ])
 
-            ], id=table_relational_df.table_id, className='table_row_wrapper', style={'display': display}
+            ], id={'type': 'table_row_wrapper', 'table_id': table_relational_df.table_id}, style={'display': display}
         )
 
         # Append generated table to list of all tables to display
         tables_view.append(new_table_row)
-        table_number =+ 1
+        table_number += 1
 
     return tables_view
 
-
-from data_analysis.data_analysis_test import display_tables_dict  # dict containing all tables to be displayed
 
 # Initialize layout (with users table)
 app.layout = html.Div(
@@ -278,7 +303,6 @@ app.layout = html.Div(
         html.Div(load_tables(display_tables_dict), id='app_wrapper')
     ]
 )
-
 
 if __name__ == '__main__':
     app.run_server(debug=False, port=8052)

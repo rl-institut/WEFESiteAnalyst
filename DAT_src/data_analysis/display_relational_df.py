@@ -1,5 +1,5 @@
 # %%
-from dash import Dash, ALL, dcc, html, Input, Output, State, dash_table, no_update, ctx
+from dash import Dash, ALL, dcc, html, Input, Output, State, dash_table, no_update, ctx, callback
 import dash_bootstrap_components as dbc
 
 import pandas as pd
@@ -12,7 +12,7 @@ logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 # Initialize app
 app = Dash(__name__,external_stylesheets=[dbc.themes.BOOTSTRAP])
 
-@app.callback(
+@callback(
     [
         Output("displayed_tables", "data", allow_duplicate=True),
         Output('app_wrapper', 'children', allow_duplicate=True),
@@ -49,7 +49,7 @@ def update_tables(active_cell,
     :param current_tables_view:
     :return:
     """
-
+    print(active_cell)
     # Get id of table that was clicked: ID is dict with the following entries:
     # "type": "table", -> fix identifier for every table
     # "table_id": relational_df.table_id,  -> specific ID of this table
@@ -317,5 +317,5 @@ app.layout = html.Div(
 )
 
 if __name__ == '__main__':
-    app.run_server(debug=False, port=8052)
+    app.run_server(debug=False, port=8051)
     logging.debug('App running')
