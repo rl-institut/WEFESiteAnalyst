@@ -3,7 +3,7 @@ Complete UI for data_analysis of DAT
 
 """
 
-from dash import Dash, ALL, dcc, html, Input, Output, State, dash_table, no_update, ctx, Patch
+from dash import Dash, ALL, dcc, html, Input, Output, State, dash_table, no_update, ctx, MATCH
 import dash_bootstrap_components as dbc
 
 import pandas as pd
@@ -40,7 +40,7 @@ Input:
 - first table visibility=True
 """
 
-"""
+""" DONE
 2. Display child tables
 - if link is clicked:
     o set child_table visibility=True
@@ -49,6 +49,7 @@ Input:
 
 """
 3. Edit tables
+- add row
 - preliminary: use dash's native edit function
 - check if input is correct
     o set columns to allow numeric, string...
@@ -90,38 +91,18 @@ function_output_dict = {key: no_update for key in callback_output_dict.keys()}
         Input({'type': 'table', 'table_id': ALL, 'table_number': ALL}, "active_cell"),
         # Clicked "close_table" button
         Input({'type': 'close_table_button', 'table_id': ALL, 'table_number': ALL}, 'n_clicks'),
-        # Clicked "add_row" button
-        Input({'type': 'add_row_button', 'table_id': ALL, 'table_number': ALL}, 'n_clicks'),
-        # Data of displayed tables
-        State({'type': 'table', 'table_id': ALL, 'table_number': ALL}, 'data'),
-        # Columns of displayed tables
-        State({'type': 'table', 'table_id': ALL, 'table_number': ALL}, 'columns'),
-        # Current filter queries in each table
-        State({'type': 'table', 'table_id': ALL, 'table_number': ALL}, "filter_query"),
-        # Current visibility of the table rows
-        State({'type': 'table_row_wrapper', 'table_id': ALL}, 'style')
     ],
     prevent_initial_call=True
 )
 def update_tables(active_cell,
-                  close_table_button_clicks,
-                  add_row_button_clicks,
-                  tables_data,
-                  tables_columns,
-                  tables_filter_queries,
-                  table_rows_style
+                  close_table_button_clicks
                   ):
     """
-    Callback function to run when any button related to an individual table or a table cell is clicked.
+    Callback function to display new table with new query or closing table
 
     :param active_cell:
     :param close_table_button_clicks:
-    :param add_row_button_clicks:
-    :param displayed_tables_data:
-    :param displayed_tables_columns:
-    :param displayed_tables_list:
-    :param current_tables_view:
-    :return:
+    :return: dict of callback outputs for styles and filter queries of all tables
     """
 
     # Get id of table that was clicked: ID is dict with the following entries:
@@ -139,20 +120,28 @@ def update_tables(active_cell,
         if active_cell[0] is None:
             return no_update
 
-        return table_cell_clicked(active_cell, table_rows_style, tables_filter_queries)
+        return table_cell_clicked(active_cell)
 
     elif element_clicked['type'] == 'close_table_button':
         # Run close table button clicked actions
         logging.debug('Close table button clicked')
-        #return (close_table_button_clicked(close_table_button_clicks, displayed_tables_list, current_tables_view)
-        #        + (displayed_tables_data,))
+        return close_table()
+
     elif element_clicked['type'] == 'add_row_button':
         logging.debug('Add row button clicked')
         #return add_table_row(add_row_button_clicks, displayed_tables_data, displayed_tables_columns,
         #                     displayed_tables_list, current_tables_view)
 
 
-def table_cell_clicked(active_cell, table_rows_style, table_filter_queries):
+def table_cell_clicked(active_cell):
+    """
+    Function to run when table cell is clicked
+    - checks if clicked cell links to child table
+    - changes display property of the corresponding child table
+    - changes filter_query property of the corresponding child table
+    :param active_cell:
+    :return: dict of callback outputs for styles and filter queries of all tables
+    """
     table_clicked = ctx.triggered_id
     print(f'table clicked: {table_clicked["table_number"]}')
 
@@ -165,7 +154,7 @@ def table_cell_clicked(active_cell, table_rows_style, table_filter_queries):
         # Get child_table_id from the clicked column
         child_table_id = active_cell[table_clicked['table_number']]['column_id'][7:]
 
-        # Update visibility this table in output_dict
+        # Update display property of child table in output_dict -> make visible
         output_dict[f'style_table_row_{child_table_id}'] = {'display': 'block'}
 
         # Get the corresponding query_col of the child table
@@ -174,14 +163,63 @@ def table_cell_clicked(active_cell, table_rows_style, table_filter_queries):
         # Get corresponding query_i
         query_id = active_cell[table_clicked['table_number']]['row_id']
 
+
+        # Update query property of child table in output_dict -> query for corresponding item
         output_dict[f'filter_query_table_{child_table_id}'] = f'{{{query_col}}} ={query_id}'
 
-        print(f' Callback returns: {output_dict}')
+        #print(f' Callback returns: {output_dict}')
         # Return dict of displayed tables and updated view (HTML) if currently displayed tables and None for active cell
         return output_dict
     else:
         return no_update
 
+
+def close_table():
+    """
+    Closes table by updating the display property in the dict of callback outputs
+    :return: dict of callback outputs for styles and filter queries of all tables
+    """
+    close_button_clicked = ctx.triggered_id
+    print(f'table clicked: {close_button_clicked["table_number"]}')
+
+    output_dict = deepcopy(function_output_dict)
+    # Update visibility this table in output_dict
+    output_dict[f'style_table_row_{close_button_clicked["table_id"]}'] = {'display': 'none'}
+
+    return output_dict
+
+
+"""@app.callback(
+    Output({'type': 'table', 'table_id': MATCH, 'table_number': MATCH}, 'data'),
+    Input({'type': 'add_row_button', 'table_id': MATCH, 'table_number': MATCH}, 'n_clicks'),
+    State({'type': 'table', 'table_id': MATCH, 'table_number': MATCH}, 'data'),
+    State({'type': 'table', 'table_id': MATCH, 'table_number': MATCH}, 'columns'),
+    State({'type': 'table', 'table_id': MATCH, 'table_number': MATCH}, 'filter_query'),
+    prevent_initial_call=True
+)"""
+def add_table_row(clicks, table_data, table_columns, table_filter_query):
+    logging.debug('Add table row button clicked:')
+
+    # Turn table data into dataframe
+    table_df = pd.DataFrame(table_data)
+
+    # Construct new row entry
+    new_row = {}
+    for col in table_columns:
+        if col['id'].startswith('!child_'):  # if column is button column
+            new_row[col['id']] = 'Click me! (added)'
+        elif col['id'] == 'id':  # if column is ID column
+            # Generate ID of new element to add -> must be unique! -> current max id +1
+            new_row[col['id']] = table_df['id'].max() + 1
+        elif col['id'].startswith('!fk_'):  # if column is query column
+            # Enter query_id
+            new_row[col['id']] = table_filter_query  # value is set query_id
+        else:
+            new_row[col['id']] = ""
+
+    table_data.append(new_row)
+
+    return table_data
 
 def load_tables(tables_dict):
     """
@@ -213,7 +251,7 @@ def load_tables(tables_dict):
                 )
             elif c in foreign_key_columns:  # If column is foreign_key column
                 original_columns.append(
-                    {"name": c, "id": c, "editable": False}  # ...it is NOT editable
+                    {"name": c, "id": "!fk_"+c, "editable": False}  # ...it is NOT editable and has prefix in id
                 )
             else:  # Every regular column...
                 original_columns.append(
@@ -257,10 +295,8 @@ def load_tables(tables_dict):
         ),
 
         # Create new row to add to app HTML layout
-
         # Generate header for new table
         header = table_relational_df.table_name
-
         # Make only first table visible on load
         display = 'block' if table_number == 0 else 'none'
 
@@ -272,16 +308,16 @@ def load_tables(tables_dict):
                         dbc.Col(table, width=11),
                         dbc.Col(
                             [
-                                dbc.Button('X', id={
+                                dbc.Row(dbc.Button("close", id={
                                     'type': 'close_table_button',
                                     "table_id": table_relational_df.table_id,
                                     "table_number": table_number
-                                }) if table_number != 0 else None,  # don't display close button for first table
-                                dbc.Button('Add row', id={
+                                }) if table_number != 0 else None), # don't display close button for first table
+                                dbc.Row(dbc.Button('add row', id={
                                     'type': 'add_row_button',
                                     "table_id": table_relational_df.table_id,
                                     'table_number': table_number
-                                }),
+                                }))
                             ],
                             width=1)
                     ])
@@ -296,9 +332,20 @@ def load_tables(tables_dict):
     return tables_view
 
 
+# Save each tables information about foreign_key columns
+tables_foreign_key_columns = {}
+for table_id, table_relational_df in display_tables_dict.items():
+    tables_foreign_key_columns[table_id] = {}
+    # Get this tables foreign key columns and save in dict:
+    # {'foreign_key_column': 'current_query_id' (None at the beginning, to be updated on queries)}
+    for parent_table_name, parent_table in table_relational_df.parent_tables.items():
+        tables_foreign_key_columns[table_id][parent_table[1]] = None
+
 # Initialize layout (with users table)
 app.layout = html.Div(
     [
+# Data store to save information about this tables foreign key columns to easily access in callbacks
+        dcc.Store(id='tables_foreign_key_columns_store', data=tables_foreign_key_columns),
         # Add first displayed table to app_wrapper
         html.Div(load_tables(display_tables_dict), id='app_wrapper')
     ]
