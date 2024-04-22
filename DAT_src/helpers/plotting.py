@@ -139,16 +139,17 @@ def plotly_high_res_df(figure, df, subplot_col=1, subplot_row=1, legend=None, le
 
         i = 0
         for column_name, col in df.items():
-            figure = figure.add_trace(go.Scattergl(
-                name=prefix+legend[i],
-                opacity=opacity,
-                line=linestyle,
-                mode=mode,
-                marker=markerstyle,
-                yaxis=yaxis,
-                legendgroup=legendgroup,
-                showlegend=showlegend
-            ),
+            figure = figure.add_trace(
+                go.Scattergl(
+                    name=prefix+legend[i],
+                    opacity=opacity,
+                    line=linestyle,
+                    mode=mode,
+                    marker=markerstyle,
+                    yaxis=yaxis,
+                    legendgroup=legendgroup,
+                    showlegend=showlegend
+                ),
                 hf_x=col.index,
                 hf_y=col,
                 row=subplot_row,
@@ -159,6 +160,8 @@ def plotly_high_res_df(figure, df, subplot_col=1, subplot_row=1, legend=None, le
         for column_name, col in df.items():
             if prefix != "":
                 name = prefix+' : '.join(column_name)
+            elif isinstance(column_name, str):
+                name = column_name
             else:
                 name = ' : '.join(column_name)
 

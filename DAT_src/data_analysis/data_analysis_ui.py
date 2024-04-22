@@ -45,11 +45,17 @@ Input:
 - if link is clicked:
     o set child_table visibility=True
     o set filter for foreign_key column in child_table to corresponding ID of element in parent table
+- close tables
+"""
+
+""" DONE
+2.1 Add rows (elements) to tables
+- add correct foreign key id
+- add new unique ID
 """
 
 """
 3. Edit tables
-- add row
 - preliminary: use dash's native edit function
 - check if input is correct
     o set columns to allow numeric, string...
@@ -64,6 +70,16 @@ Input:
 - on button click:
     o save all tables into pickle
     o creat filesystem for version control...
+"""
+
+"""
+5. Generate relational_dfs from nested dicts 
+- develop and test with survey data
+"""
+
+"""
+6. Display multiple select content
+- checkbox visualisation for table cells that contain lists 
 """
 
 from data_analysis.data_analysis_test import display_tables_dict  # dict containing all tables to be displayed
@@ -209,7 +225,7 @@ def add_table_row(clicks, table_data, table_columns, table_filter_query):
             # Generate ID of new element to add -> must be unique! -> current max id +1
             new_row[col['id']] = table_df['id'].max() + 1
         elif col['id'].startswith('!fk_'):  # if column is query column
-            # Extract part of table query of this column -> exists only once get first list item
+            # Extract part of table query of this foreign key column -> exists only once -> get first list item
             query = [k for k in table_filter_query.split("&&") if col['id'] in k][0]
             # Find the index of the equal sign
             index = query.find('=')
@@ -217,6 +233,7 @@ def add_table_row(clicks, table_data, table_columns, table_filter_query):
             if index == -1:  # if no equal sign is found
                 new_row[col['id']] = ""  # no value is set in this column
                 # TODO: fk_column is currently not editable -> user would not be able to provide fk_id
+                # -> for now this is ok?
             else:
                 new_row[col['id']] = int(query[index + 1:])  # value is set to be the fk_id of the current query
         else:
