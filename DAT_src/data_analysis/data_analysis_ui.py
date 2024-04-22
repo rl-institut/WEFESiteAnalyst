@@ -358,16 +358,28 @@ def load_tables(tables_dict):
 
     return tables_view
 
+navbar = dbc.NavbarSimple(
+    children=[
+        dbc.NavItem(dbc.NavLink("Home", href="/")),
+        dbc.NavItem(dbc.NavLink("Data analysis", href="/data_analysis")),
+    ],
+    brand="DAT",
+    color="dark",
+    dark=True,
+    className="mb-2",
+)
+
 # Initialize layout (with users table)
 app.layout = html.Div(
     [
-# Data store to save information about this tables foreign key columns to easily access in callbacks
-        dcc.Store(id='tables_foreign_key_columns_store', data=tables_foreign_key_columns),
-        # Add first displayed table to app_wrapper
-        html.Div(load_tables(display_tables_dict), id='app_wrapper')
+        navbar,
+        dbc.Container([
+            dbc.Row([dbc.Col(dbc.Button("Save data"), width="2")], id='task_bar'),
+            dbc.Row(load_tables(display_tables_dict), id='tables_wrapper')
+        ], id='page-content'),
     ]
 )
 
 if __name__ == '__main__':
-    app.run_server(debug=False, port=8052)
+    app.run_server(debug=True, port=8052)
     logging.debug('App running')

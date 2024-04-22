@@ -5,7 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/DAT_src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="WEFESiteAnalyst_DAT_dev_local" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="WEFESiteAnalyst" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PyDocumentationSettings">
