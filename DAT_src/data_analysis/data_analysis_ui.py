@@ -358,16 +358,6 @@ def load_tables(tables_dict):
 
     return tables_view
 
-
-# Save each tables information about foreign_key columns
-tables_foreign_key_columns = {}
-for table_id, table_relational_df in display_tables_dict.items():
-    tables_foreign_key_columns[table_id] = {}
-    # Get this tables foreign key columns and save in dict:
-    # {'foreign_key_column': 'current_query_id' (None at the beginning, to be updated on queries)}
-    for parent_table_name, parent_table in table_relational_df.parent_tables.items():
-        tables_foreign_key_columns[table_id][parent_table[1]] = None
-
 # Initialize layout (with users table)
 app.layout = html.Div(
     [
