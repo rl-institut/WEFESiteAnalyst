@@ -34,6 +34,15 @@ def convert_usage_windows(input_dict):
 
     return usage_windows
 
+def rename_keys(dictionary):
+    new_dict = {}
+    for i, key in enumerate(dictionary):
+        new_dict[i] = dictionary[key]
+    return new_dict
 
-
+def set_values (dictionary, variable):
+    new_dict = {}
+    for key in dictionary:
+        new_dict[key] = variable
+    return new_dict
 
