@@ -1,9 +1,7 @@
 import json
-from DAT_src.kobo_api_access import load_kobo_data
 import defaults
 from copy import copy
 from conversion_functions import *
-from defaults import *
 
 with open("first_survey.json", "r") as file:
     first_survey = json.load(file)

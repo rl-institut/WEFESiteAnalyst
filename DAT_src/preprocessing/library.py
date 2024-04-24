@@ -1,6 +1,6 @@
 import json
 
-from DAT_src.kobo_api_access import load_kobo_data
+from preprocessing.kobo_api_access import load_kobo_data
 
 results = load_kobo_data(form_id="aFhz5xWryVk68Mn7y978hn")
 

@@ -28,18 +28,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9fb520b-0171-4c5e-9970-c97a4b02cb25" name="Default Changelist" comment="Data preprocessing and visualisation">
-      <change afterPath="$PROJECT_DIR$/DAT_src/data_analysis_test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DAT_src/display_relational_df.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DAT_src/ramp_model_main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DAT_src/relational_df.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DAT_src/survey_data_analysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAT_src/dat_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAT_src/dat_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAT_src/drinking_water_demand.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAT_src/drinking_water_demand.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAT_src/input_data_table.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAT_src/input_data_table.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAT_src/plotting.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAT_src/plotting.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAT_src/service_water_demand.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAT_src/service_water_demand.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAT_src/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAT_src/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +48,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="develop_DAT" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -78,29 +67,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/johan/PycharmProjects/RAMP/ramp/core/core.py&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.dat_main_app.executor": "Run",
+    "Python.main_data_analysis_editor.executor": "Run",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "restructure__preprocessing__code",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/johan/PycharmProjects/RAMP/ramp/core/core.py",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\johan\PycharmProjects\WEFESiteAnalyst_DAT_dev_local\DAT_src" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.data_analysis_test">
+  <component name="RunManager" selected="Python.main_data_analysis_editor">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="ADRM" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -121,20 +114,18 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="dash_example_table" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="dat_main_app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ADRM" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DAT_src" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DAT_src/data_analysis" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DAT_src/dash_example_table.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DAT_src/data_analysis/dat_main_app.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -145,6 +136,7 @@
     </configuration>
     <configuration name="data_analysis_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ADRM" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -167,6 +159,7 @@
     </configuration>
     <configuration name="input_data_table" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ADRM" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -187,20 +180,18 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="preprocessing_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="main_data_analysis_editor" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ADRM" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DAT_src" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DAT_src/data_analysis/data_analysis_editor" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DAT_src/preprocessing_test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DAT_src/data_analysis/data_analysis_editor/main_data_analysis_editor.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -211,6 +202,7 @@
     </configuration>
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ADRM" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -233,11 +225,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main_data_analysis_editor" />
+        <item itemvalue="Python.dat_main_app" />
         <item itemvalue="Python.data_analysis_test" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.input_data_table" />
-        <item itemvalue="Python.dash_example_table" />
-        <item itemvalue="Python.preprocessing_test" />
       </list>
     </recent_temporary>
   </component>
