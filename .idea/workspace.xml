@@ -27,8 +27,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9fb520b-0171-4c5e-9970-c97a4b02cb25" name="Default Changelist" comment="Data preprocessing and visualisation">
+    <list default="true" id="f9fb520b-0171-4c5e-9970-c97a4b02cb25" name="Default Changelist" comment="Add gitignore">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAT_src/data_analysis/pages/data_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAT_src/data_analysis/pages/data_analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAT_src/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAT_src/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +45,17 @@
       </list>
     </option>
   </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
   <component name="Git.Merge.Settings">
     <option name="BRANCH" value="origin/api_preprocessing" />
   </component>
@@ -53,6 +67,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;JW-Kraft&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/rl-institut/WEFESiteAnalyst&quot;,
+    &quot;accountId&quot;: &quot;f6e547ae-6f41-4b24-8c5e-4cac6406b96a&quot;
+  }
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -67,30 +93,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.dat_main_app.executor": "Run",
-    "Python.main_data_analysis_editor.executor": "Run",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "restructure__preprocessing__code",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/johan/PycharmProjects/RAMP/ramp/core/core.py",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.dat_main_app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_data_analysis_editor.executor&quot;: &quot;Run&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;data__analysis__ui&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Johann/PycharmProjects/datatable_editor&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\johan\PycharmProjects\WEFESiteAnalyst_DAT_dev_local\DAT_src" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main_data_analysis_editor">
+  <component name="RunManager" selected="Python.dat_main_app">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="ADRM" />
       <option name="ENV_FILES" value="" />
@@ -185,6 +211,9 @@
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DAT_src/data_analysis/data_analysis_editor" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -225,17 +254,25 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main_data_analysis_editor" />
         <item itemvalue="Python.dat_main_app" />
+        <item itemvalue="Python.main_data_analysis_editor" />
         <item itemvalue="Python.data_analysis_test" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.input_data_table" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-PY-241.14494.241" />
+        <option value="bundled-python-sdk-0509580d9d50-28c9f5db9ffe-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.14494.241" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
-    <configuration />
+    <configuration>C:\Users\Johann\AppData\Roaming\Subversion</configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -261,6 +298,9 @@
       <workItem from="1711099934691" duration="10466000" />
       <workItem from="1711359406825" duration="18256000" />
       <workItem from="1711614711823" duration="4493000" />
+      <workItem from="1713970584663" duration="32000" />
+      <workItem from="1713970651259" duration="301000" />
+      <workItem from="1713971460675" duration="4236000" />
     </task>
     <task id="LOCAL-00001" summary="Input layer updated">
       <created>1592059227693</created>
@@ -363,7 +403,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709217080847</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Add gitignore">
+      <option name="closed" value="true" />
+      <created>1713970490100</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1713970490100</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -380,7 +428,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="develop_DAT" />
+                        <option value="data_analysis_ui" />
                       </list>
                     </value>
                   </entry>
@@ -405,7 +453,8 @@
     <MESSAGE value="Agro-processing and drinking water demand RAMP model" />
     <MESSAGE value="update .gitignore" />
     <MESSAGE value="Data preprocessing and visualisation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Data preprocessing and visualisation" />
+    <MESSAGE value="Add gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add gitignore" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -419,11 +468,6 @@
           <url>file://$PROJECT_DIR$/../RAMP/ramp/core/core.py</url>
           <line>143</line>
           <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/DAT_src/test.py</url>
-          <line>4</line>
-          <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/DAT_src/dash_example_table.py</url>

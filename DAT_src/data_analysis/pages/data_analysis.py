@@ -1,6 +1,11 @@
 import dash
 from dash import Dash, html, callback, Output, Input, dcc
 import dash_bootstrap_components as dbc
+from datatable_editor.core import DatatableEditor
+
+from datatable_editor.demo_data import display_tables_dict
+
+editor_port = 8053
 
 dash.register_page(
     __name__,
@@ -16,7 +21,7 @@ layout = dbc.Container([
         [
             dbc.Col([
                 html.Div('List of survey data loaded from Kobo. Click to open analysis editor.'),
-                html.A('Open analysis editor', id='open-analysis-editor', href='http://127.0.0.1:8053/',
+                html.A('Open analysis editor', id='open-analysis-editor', href=f'http://127.0.0.1:{editor_port}/',
                        target='_blank'),
             ], width=6),
             dbc.Col([
@@ -39,19 +44,10 @@ def open_analysis_editor(n_clicks):
     :param n_clicks:
     :return:
     """
-    # Initialize app
+    # Initialize datatable editor
+    editor = DatatableEditor(datatables=display_tables_dict, port=editor_port, debug=True)
 
-    #TODO call function to start data_analysis_editor from this callback
+    # Run editor
+    editor.run_app()
 
-    # Test -> starting other dash app works
-    app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
-    # Initialize layout of navbar and page_content container
-    app.layout = dbc.Container(
-        [
-            dbc.ButtonGroup([dbc.Button("Save data")], id='task_bar'),
-            dbc.Row(html.H2('test'))
-        ]
-    )
-
-    app.run_server(debug=True, port=8053)
 
