@@ -2,6 +2,7 @@ import json
 import defaults
 from copy import copy
 from conversion_functions import *
+from defaults import *
 
 with open("first_survey.json", "r") as file:
     first_survey = json.load(file)
@@ -44,7 +45,8 @@ if first_survey["G_0/respondent_type"] == "agroprocessing":
     working_days_AP=working_AP                                     # Working days (agroprocessing)
 
 # Get the parameters - Working days (household)
-hh_working_day = [0,1,2,3,4,5,6]
+if first_survey["G_0/respondent_type"] == "household":
+    hh_working_day = [0,1,2,3,4,5,6]
 
 # Get the parameters - Working days (service)
 if first_survey["G_0/respondent_type"] == "service":
