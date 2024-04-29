@@ -46,3 +46,5 @@ months_defaults = {
     '11' : None,
     '12' : None
 }
+
+exc_rate = 0.05334           #$/ZAR exchange rate
