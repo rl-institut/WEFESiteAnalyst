@@ -109,6 +109,7 @@ if first_survey["G_0/respondent_type"] == "business":
             power = first_survey["B_11/"+app_name+"_power"]
             value = first_survey ["B_11/"+app_name+"_value"]
             hour = first_survey["B_11/"+app_name+"_hour_wd"]
+            switch_on = first_survey["B_11/"+app_name+"_min_on"]
             string = first_survey["B_11/"+app_name+"_usage_wd"]
 
             usage_wd_dict = copy(defaults.usage_wd_defaults)
@@ -124,6 +125,7 @@ if first_survey["G_0/respondent_type"] == "business":
                 "power" : float(power),                             # appliance power in W
                 "value" : float(value),                             # appliance value
                 "usage_time": float(hour)*60,                       # appliance operating usage time in min
+                "func_cycle": floar(switch_on),
                 "time_window" : convert_usage_windows(usage_wd_dict)                       # appliance usage windows
             }
 
@@ -139,6 +141,7 @@ if first_survey["G_0/respondent_type"] == "household":
             power = first_survey["H_16/"+app_name+"_power_H"]
             value = first_survey ["H_16/"+app_name+"_value_H"]
             hour = first_survey["H_16/"+app_name+"_hour_wd_H"]
+            switch_on = first_survey["H_16/"+app_name+"_min_on_H"]
             string = first_survey["H_16/"+app_name+"_usage_wd_H"]
 
             usage_wd_dict = copy(defaults.usage_wd_defaults)
@@ -170,6 +173,7 @@ if first_survey["G_0/respondent_type"] == "service":
             power = first_survey["S_3/"+app_name+"_power_S"]
             value = first_survey ["S_3/"+app_name+"_value_S"]
             hour = first_survey["S_3/"+app_name+"_hour_wd_S"]
+            switch_on = first_survey["S_3/"+app_name+"_min_on_S"]
             string = first_survey["S_3/"+app_name+"_usage_wd_S"]
 
             usage_wd_dict = copy(defaults.usage_wd_defaults)
@@ -650,9 +654,12 @@ if first_survey["G_0/respondent_type"] == "local_aut":
     church = float(first_survey["LA_5/number_church"])
     mosque = float(first_survey["LA_5/number_mosque"])
 
-    mill = float(first_survey["LA_7/number_mill"])
-    husker = float(first_survey["LA_7/number_husker"])
-    other = float(first_survey["LA_7/number_other"])
+    mill_small = float(first_survey["LA_7/number_small_mill"])
+    mill_large = float(first_survey["LA_7/number_large_mill"])
+    husker_small = float(first_survey["LA_7/number_small_husker"])
+    husker_large = float(first_survey["LA_7/number_large_husker"])
+    other_small = float(first_survey["LA_7/number_small_other1"])
+    other_large = float(first_survey["LA_7/number_large_other1"])
 
     household_numerosity = {
         "low_income_hh" : number_hh * perc_low_income / 100,
