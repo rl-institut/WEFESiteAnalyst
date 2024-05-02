@@ -27,10 +27,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9fb520b-0171-4c5e-9970-c97a4b02cb25" name="Default Changelist" comment="Add gitignore">
+    <list default="true" id="f9fb520b-0171-4c5e-9970-c97a4b02cb25" name="Default Changelist" comment="Move datatable editor to external package">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAT_src/data_analysis/pages/data_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAT_src/data_analysis/pages/data_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAT_src/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAT_src/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAT_src/data_analysis/dat_main_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAT_src/data_analysis/dat_main_app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAT_src/data_analysis/data_analysis_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAT_src/data_analysis/data_analysis_ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAT_src/input/complete_input.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAT_src/input/complete_input.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,12 +97,14 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Python.dat_main_app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.data_analysis_ui.executor&quot;: &quot;Run&quot;,
+    &quot;Python.datatable_editor_demo.executor&quot;: &quot;Run&quot;,
     &quot;Python.main_data_analysis_editor.executor&quot;: &quot;Run&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;data__analysis__ui&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Johann/PycharmProjects/datatable_editor&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Johann/PycharmProjects/WEFESiteAnalyst/DAT_src/datatable_test&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -113,6 +116,8 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Johann\PycharmProjects\WEFESiteAnalyst\DAT_src\datatable_test" />
+      <recent name="C:\Users\Johann\PycharmProjects\WEFESiteAnalyst\DAT_src" />
       <recent name="C:\Users\johan\PycharmProjects\WEFESiteAnalyst_DAT_dev_local\DAT_src" />
     </key>
   </component>
@@ -183,7 +188,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="input_data_table" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="data_analysis_ui" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ADRM" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DAT_src/data_analysis" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DAT_src/data_analysis/data_analysis_ui.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="datatable_editor_demo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ADRM" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -192,12 +217,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DAT_src" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DAT_src/datatable_test" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DAT_src/input_data_table.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DAT_src/datatable_test/datatable_editor_demo.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -229,36 +254,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="ADRM" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DAT_src" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DAT_src/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.dat_main_app" />
+        <item itemvalue="Python.data_analysis_ui" />
+        <item itemvalue="Python.datatable_editor_demo" />
         <item itemvalue="Python.main_data_analysis_editor" />
         <item itemvalue="Python.data_analysis_test" />
-        <item itemvalue="Python.test" />
-        <item itemvalue="Python.input_data_table" />
       </list>
     </recent_temporary>
   </component>
@@ -300,7 +302,15 @@
       <workItem from="1711614711823" duration="4493000" />
       <workItem from="1713970584663" duration="32000" />
       <workItem from="1713970651259" duration="301000" />
-      <workItem from="1713971460675" duration="4236000" />
+      <workItem from="1713971460675" duration="4315000" />
+      <workItem from="1714031460693" duration="15356000" />
+      <workItem from="1714156050591" duration="1023000" />
+      <workItem from="1714377347985" duration="5260000" />
+      <workItem from="1714391213293" duration="1571000" />
+      <workItem from="1714393496225" duration="120000" />
+      <workItem from="1714393740661" duration="186000" />
+      <workItem from="1714394258888" duration="2336000" />
+      <workItem from="1714460170880" duration="3546000" />
     </task>
     <task id="LOCAL-00001" summary="Input layer updated">
       <created>1592059227693</created>
@@ -411,7 +421,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713970490100</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Move datatable editor to external package">
+      <option name="closed" value="true" />
+      <created>1713978022118</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1713978022118</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -454,7 +472,8 @@
     <MESSAGE value="update .gitignore" />
     <MESSAGE value="Data preprocessing and visualisation" />
     <MESSAGE value="Add gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add gitignore" />
+    <MESSAGE value="Move datatable editor to external package" />
+    <option name="LAST_COMMIT_MESSAGE" value="Move datatable editor to external package" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
