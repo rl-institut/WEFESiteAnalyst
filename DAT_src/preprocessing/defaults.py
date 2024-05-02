@@ -54,9 +54,9 @@ medium_buck = 5
 small_buck = 1
 
 density_dict = {
-    'g/biogas' : 0.0012,
-    'h/biofuel' : 0.9,
-    'i/kerosene' : 0.8,
-    'j/LPG' : 0.55,
-    'k/eth_alc' : 0.789
+    'g/biogas_density' : 0.0012,
+    'h/biofuel_density' : 0.9,
+    'i/kerosene_density' : 0.8,
+    'j/LPG_density' : 0.55,
+    'k/eth_alc_density' : 0.789
 }
