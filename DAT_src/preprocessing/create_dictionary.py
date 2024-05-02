@@ -61,19 +61,7 @@ if first_survey["G_0/respondent_type"] == "service":
 
     serv_working_days = convert(serv_work_days_dict)
 
-# Get the parameters - Monthly revenues (Business)
-rev_B = {}
-
-if first_survey["G_0/respondent_type"] == "business":
-    rev_week = float(first_survey["B_4b/bus_rev_lastweek"])
-    rev_month = float(first_survey["B_4b/bus_rev_lastmonth"])
-
-    rev_B["business monthly revenues"] = {
-        "weekly revenues * 4" : rev_week * 4,
-        "monthly revenues" : rev_month
-    }
-
-# Get the parameters - Monthly revenues (Household)
+# Get the parameters - Savings (Household)
 sav_H = {}
 
 total_saving_usd = 0
