@@ -23,13 +23,13 @@ months_present_defaults = {
 }
 
 working_day_default = {
-    'Monday' : None,
-    'Tuesday' : None,
-    'Wednesday' : None,
-    'Thursday' : None,
-    'Friday' : None,
-    'Saturday' : None,
-    'Sunday' : None
+    'monday' : None,
+    'tuesday' : None,
+    'wednesday' : None,
+    'thursday' : None,
+    'friday' : None,
+    'saturday' : None,
+    'sunday' : None
 }
 
 months_defaults = {
