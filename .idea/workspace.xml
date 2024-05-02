@@ -27,8 +27,12 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9fb520b-0171-4c5e-9970-c97a4b02cb25" name="Default Changelist" comment="Data preprocessing and visualisation">
+    <list default="true" id="f9fb520b-0171-4c5e-9970-c97a4b02cb25" name="Default Changelist" comment="Move datatable editor to external package">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAT_src/data_analysis/dat_main_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAT_src/data_analysis/dat_main_app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAT_src/data_analysis/data_analysis_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAT_src/data_analysis/data_analysis_ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAT_src/input/complete_input.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAT_src/input/complete_input.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +46,17 @@
       </list>
     </option>
   </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
   <component name="Git.Merge.Settings">
     <option name="BRANCH" value="origin/api_preprocessing" />
   </component>
@@ -53,6 +68,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;JW-Kraft&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/rl-institut/WEFESiteAnalyst&quot;,
+    &quot;accountId&quot;: &quot;f6e547ae-6f41-4b24-8c5e-4cac6406b96a&quot;
+  }
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -67,30 +94,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.dat_main_app.executor": "Run",
-    "Python.main_data_analysis_editor.executor": "Run",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "restructure__preprocessing__code",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/johan/PycharmProjects/RAMP/ramp/core/core.py",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.dat_main_app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.data_analysis_ui.executor&quot;: &quot;Run&quot;,
+    &quot;Python.datatable_editor_demo.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_data_analysis_editor.executor&quot;: &quot;Run&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;data__analysis__ui&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Johann/PycharmProjects/WEFESiteAnalyst/DAT_src/datatable_test&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Johann\PycharmProjects\WEFESiteAnalyst\DAT_src\datatable_test" />
+      <recent name="C:\Users\Johann\PycharmProjects\WEFESiteAnalyst\DAT_src" />
       <recent name="C:\Users\johan\PycharmProjects\WEFESiteAnalyst_DAT_dev_local\DAT_src" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main_data_analysis_editor">
+  <component name="RunManager" selected="Python.dat_main_app">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="ADRM" />
       <option name="ENV_FILES" value="" />
@@ -157,7 +188,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="input_data_table" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="data_analysis_ui" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ADRM" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DAT_src/data_analysis" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DAT_src/data_analysis/data_analysis_ui.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="datatable_editor_demo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ADRM" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -166,12 +217,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DAT_src" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DAT_src/datatable_test" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DAT_src/input_data_table.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DAT_src/datatable_test/datatable_editor_demo.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -185,6 +236,9 @@
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DAT_src/data_analysis/data_analysis_editor" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -200,42 +254,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="ADRM" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DAT_src" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DAT_src/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main_data_analysis_editor" />
         <item itemvalue="Python.dat_main_app" />
+        <item itemvalue="Python.data_analysis_ui" />
+        <item itemvalue="Python.datatable_editor_demo" />
+        <item itemvalue="Python.main_data_analysis_editor" />
         <item itemvalue="Python.data_analysis_test" />
-        <item itemvalue="Python.test" />
-        <item itemvalue="Python.input_data_table" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-PY-241.14494.241" />
+        <option value="bundled-python-sdk-0509580d9d50-28c9f5db9ffe-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.14494.241" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
-    <configuration />
+    <configuration>C:\Users\Johann\AppData\Roaming\Subversion</configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -261,6 +300,17 @@
       <workItem from="1711099934691" duration="10466000" />
       <workItem from="1711359406825" duration="18256000" />
       <workItem from="1711614711823" duration="4493000" />
+      <workItem from="1713970584663" duration="32000" />
+      <workItem from="1713970651259" duration="301000" />
+      <workItem from="1713971460675" duration="4315000" />
+      <workItem from="1714031460693" duration="15356000" />
+      <workItem from="1714156050591" duration="1023000" />
+      <workItem from="1714377347985" duration="5260000" />
+      <workItem from="1714391213293" duration="1571000" />
+      <workItem from="1714393496225" duration="120000" />
+      <workItem from="1714393740661" duration="186000" />
+      <workItem from="1714394258888" duration="2336000" />
+      <workItem from="1714460170880" duration="3546000" />
     </task>
     <task id="LOCAL-00001" summary="Input layer updated">
       <created>1592059227693</created>
@@ -363,7 +413,23 @@
       <option name="project" value="LOCAL" />
       <updated>1709217080847</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Add gitignore">
+      <option name="closed" value="true" />
+      <created>1713970490100</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1713970490100</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Move datatable editor to external package">
+      <option name="closed" value="true" />
+      <created>1713978022118</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1713978022118</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -380,7 +446,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="develop_DAT" />
+                        <option value="data_analysis_ui" />
                       </list>
                     </value>
                   </entry>
@@ -405,7 +471,9 @@
     <MESSAGE value="Agro-processing and drinking water demand RAMP model" />
     <MESSAGE value="update .gitignore" />
     <MESSAGE value="Data preprocessing and visualisation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Data preprocessing and visualisation" />
+    <MESSAGE value="Add gitignore" />
+    <MESSAGE value="Move datatable editor to external package" />
+    <option name="LAST_COMMIT_MESSAGE" value="Move datatable editor to external package" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -419,11 +487,6 @@
           <url>file://$PROJECT_DIR$/../RAMP/ramp/core/core.py</url>
           <line>143</line>
           <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/DAT_src/test.py</url>
-          <line>4</line>
-          <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/DAT_src/dash_example_table.py</url>
