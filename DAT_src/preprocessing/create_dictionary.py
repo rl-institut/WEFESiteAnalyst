@@ -1,8 +1,8 @@
 import json
 import defaults
 from copy import copy
-from conversion_functions import *
-from defaults import *
+from preprocessing.conversion_functions import *
+from preprocessing.defaults import *
 
 with open("first_survey.json", "r") as file:
     first_survey = json.load(file)
@@ -12,11 +12,14 @@ months_present = []
 working_days = []
 total_saving = 0
 rev_month = 0
-number = 0
-power = 0
-hour = 0
-switch_on = 0
+number = 0                  # number of electrical appliance
+power = 0                   # power [W] of the electrical appliance
+hour = 0                    # daily time of use in min
+switch_on = 0               # minimal duration of switch on event in minutes
 
+daily_cons = 0              # amount of fuel used for this demand [kg]
+fuel = {}                   # fuel type used
+cooking_device = {}         # stove used for this cooking demand
 
 # Get the parameters - Months of stay in the village
 string_month = first_survey["G_1b/residency_month"]
