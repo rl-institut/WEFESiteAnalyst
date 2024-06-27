@@ -525,6 +525,13 @@ class RampControl:
                     # Get this month's daily volume of this demand
                     daily_demand = demand_data['daily_demand'][month]
 
+                    # Verifica che 'usage_windows' contenga abbastanza elementi e assegna valori di default se necessario
+                    usage_windows = demand_data.get('usage_windows', [])
+
+                    window_1 = minutes_wd(usage_windows[0]) if len(usage_windows) > 0 else None
+                    window_2 = minutes_wd(usage_windows[1]) if len(usage_windows) > 1 else None
+                    window_3 = minutes_wd(usage_windows[2]) if len(usage_windows) > 2 else None
+
                     # Add appliance to user instance
                     new_user.add_appliance(
                         name=demand_name,
@@ -534,9 +541,9 @@ class RampControl:
                         time_fraction_random_variability=demand_metadata['daily_demand_variability'],
 
                         num_windows=num_usage_windows,
-                        window_1=minutes_wd(demand_data['usage_windows'][0]),
-                        window_2=minutes_wd(demand_data['usage_windows'][1]),
-                        window_3=minutes_wd(demand_data['usage_windows'][2]),
+                        window_1=window_1,
+                        window_2=window_2,
+                        window_3=window_3,
 
                         wd_we_type=2,  # Service water demand is the same on every day of the week
                     )
