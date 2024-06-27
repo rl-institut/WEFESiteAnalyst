@@ -9,6 +9,102 @@ admin_input = {
         'outdoor_lights': {
             'daily_use_variability': 0.3,
             'usage_window_variability': 0.1
+        },
+        'radio': {
+            'daily_use_variability': 0.3,
+            'usage_window_variability': 0.1
+        },
+        'fan': {
+            'daily_use_variability': 0.3,
+            'usage_window_variability': 0.1
+        },
+        'pc': {
+            'daily_use_variability': 0.3,
+            'usage_window_variability': 0.1
+        },
+        'refrigerator': {
+            'daily_use_variability': 0.3,
+            'usage_window_variability': 0.1
+        },
+        'in_bulb': {
+            'daily_use_variability': 0.3,
+            'usage_window_variability': 0.1
+        },
+        'out_bulb': {
+            'daily_use_variability': 0.3,
+            'usage_window_variability': 0.1
+        },
+        'television': {
+            'daily_use_variability': 0.3,
+            'usage_window_variability': 0.1
+        },
+        'saw': {
+            'daily_use_variability': 0.3,
+            'usage_window_variability': 0.1
+        },
+        'cd': {
+            'daily_use_variability': 0.3,
+            'usage_window_variability': 0.1
+        },
+        'air': {
+            'daily_use_variability': 0.3,
+            'usage_window_variability': 0.1
+        },
+        'blender': {
+            'daily_use_variability': 0.3,
+            'usage_window_variability': 0.1
+        },
+        'shaver': {
+            'daily_use_variability': 0.3,
+            'usage_window_variability': 0.1
+        },
+        'welder': {
+            'daily_use_variability': 0.3,
+            'usage_window_variability': 0.1
+        },
+        'iron': {
+            'daily_use_variability': 0.3,
+            'usage_window_variability': 0.1
+        },
+        'fan': {
+            'daily_use_variability': 0.3,
+            'usage_window_variability': 0.1
+        },
+        'kettle': {
+            'daily_use_variability': 0.3,
+            'usage_window_variability': 0.1
+        },
+        'wash_mach': {
+            'daily_use_variability': 0.3,
+            'usage_window_variability': 0.1
+        },
+        'mobile': {
+            'daily_use_variability': 0.3,
+            'usage_window_variability': 0.1
+        },
+        'other_device_1': {
+            'daily_use_variability': 0.3,
+            'usage_window_variability': 0.1
+        },
+        'other_device_2': {
+            'daily_use_variability': 0.3,
+            'usage_window_variability': 0.1
+        },
+        'other_device_3': {
+            'daily_use_variability': 0.3,
+            'usage_window_variability': 0.1
+        },
+        'other_device_4': {
+            'daily_use_variability': 0.3,
+            'usage_window_variability': 0.1
+        },
+        'other_device_5': {
+            'daily_use_variability': 0.3,
+            'usage_window_variability': 0.1
+        },
+        'other_device_6': {
+            'daily_use_variability': 0.3,
+            'usage_window_variability': 0.1
         }
     },
     'cooking_metadata': {
@@ -26,6 +122,34 @@ admin_input = {
                 'biogas': {
                     'energy_content': 10,
                     'unit': 'l'
+                },
+                'biofuel': {
+                    'energy_content': 10,
+                    'unit': 'l'
+                },
+                'kerosene':{
+                    'energy_content': 10,
+                    'unit': 'l'
+                },
+                'pellet':{
+                    'energy_content': 10,
+                    'unit': 'kg'
+                },
+                'briquette': {
+                    'energy_content': 10,
+                    'unit': 'kg'
+                },
+                'dung': {
+                    'energy_content': 10,
+                    'unit': 'kg'
+                },
+                'LPG': {
+                    'energy_content': 10,
+                    'unit': 'kg'
+                },
+                'eth_alc': {
+                    'energy_content': 10,
+                    'unit': 'kg'
                 }
             },
             'cooking_stoves': {
@@ -33,6 +157,33 @@ admin_input = {
                     'efficiency': 0.1
                 },
                 'advanced_firewood_stove': {
+                    'efficiency': 0.2
+                },
+                'CD_ICS': {
+                    'efficiency': 0.2
+                },
+                'CD_LPG': {
+                    'efficiency': 0.2
+                },
+                'CD_three_stone':{
+                    'efficiency': 0.2
+                },
+                'CD_traditional_fire': {
+                    'efficiency': 0.2
+                },
+                'CD_hot_plates': {
+                    'efficiency': 0.2
+                },
+                'CD_solar_cooker': {
+                    'efficiency': 0.2
+                },
+                'CD_ethanol': {
+                    'efficiency': 0.2
+                },
+                'CD_other': {
+                    'efficiency': 0.2
+                },
+                'CD_traditional_charcoal':{
                     'efficiency': 0.2
                 }
             }
@@ -43,17 +194,26 @@ admin_input = {
                 'energy_content': 10,  # energy content in kWh per unit of fuel
                 'unit': 'l'
             },
-            'electricity': {
+            'electric': {
                 'energy_content': 1,
                 'unit': 'kWh'
+            },
+            'petrol': {
+                'energy_content': 8,
+                'unit': 'l'
             }
         },
-        'husking_mill': {
+        'husker': {
             'daily_use_variability': 0.2,
             'usage_window_variability': 0.2,
             'processed_per_run_variability': 0.2,
         },
-        'oil_press': {
+        'mill': {
+            'daily_use_variability': 0.2,
+            'usage_window_variability': 0.2,
+            'processed_per_run_variability': 0.2,
+        },
+        'oil': {
             'daily_use_variability': 0.2,
             'usage_window_variability': 0.2,
             'processed_per_run_variability': 0.2,
