@@ -203,7 +203,7 @@ admin_input = {
                 'unit': 'l'
             }
         },
-        'husker': {
+        'husking_mill': {
             'daily_use_variability': 0.2,
             'usage_window_variability': 0.2,
             'processed_per_run_variability': 0.2,
