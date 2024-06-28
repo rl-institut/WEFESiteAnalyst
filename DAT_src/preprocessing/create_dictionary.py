@@ -203,7 +203,6 @@ if first_survey["G_0/respondent_type"] == "service":
             }
 
 
-
 # Get the parameters - Cooking demand (Business)
 cook_dict_B = {}
 

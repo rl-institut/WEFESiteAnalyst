@@ -1,3 +1,6 @@
+from preprocessing.create_dictionary import months_present
+from preprocessing.create_dictionary import working_days
+
 #%% Complete input data dict
 # Dummy dict of households with electrical appliances
 # Will be read from surveys
@@ -5,8 +8,8 @@ input_dict = {
     'low_income_hh':
         {
         'num_users': 20,
-        'months_present': [1, 2, 3, 4, 7, 8, 9, 10, 11, 12],  # months at which this user is present in the settlement
-        'working_days': [0, 1, 2, 3, 4, 5],  # days at which this user uses his appliances
+        'months_present': months_present,  # months at which this user is present in the settlement
+        'working_days': working_days,  # days at which this user uses his appliances
         'appliances':  # electrical appliances that this user owns
             {
             'indoor_lights':
@@ -171,3 +174,6 @@ input_dict = {
         }
     },
 }
+
+print(months_present)
+print(working_days)
