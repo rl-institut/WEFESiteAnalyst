@@ -1,0 +1,1 @@
+{"months_present": [0, 1, 2, 3], "working_days": [], "elec_demand_S": {"in_bulb": {"number": 2.0, "power": 5.0, "value": 10.0, "usage_time": 180.0, "time_window": [[10, 22]]}, "out_bulb": {"number": 5.0, "power": 8.0, "value": 15.0, "usage_time": 360.0, "time_window": [[7, 10], [18, 24]]}}}
