@@ -2,13 +2,17 @@ from ramp_model.ramp_control import RampControl
 
 from helpers import plotting
 from plotly.subplots import make_subplots
-from input.complete_input import input_dict
+#from input.complete_input import input_dict
 from input.admin_input import admin_input
+from preprocessing.process_survey import process_survey
 
 # Create instance of RampControl class, define timeframe to model load profiles
 ramp_control = RampControl(365, '2018-01-01')
 
-dat_output = ramp_control.run_opti_mg_dat(input_dict, admin_input)
+#dat_output = ramp_control.run_opti_mg_dat(input_dict, admin_input)
+input_dic = process_survey(surv_id="atiMZ5E4jaZHv37TUekb6N", token="ea290627972a055fd067e1efc02c803869b1747c",DUMP=True)
+
+dat_output = ramp_control.run_opti_mg_dat(input_dic, admin_input)
 # %% Plot raw output
 fig = make_subplots(rows=5, cols=1, shared_xaxes=True)
 
@@ -30,3 +34,4 @@ agg_demand.head()
 fig = make_subplots(rows=1, cols=1, shared_xaxes=True)
 fig = plotting.plotly_high_res_df(fig, df=agg_demand, subplot_row=1)
 fig.show_dash(mode='external')
+
