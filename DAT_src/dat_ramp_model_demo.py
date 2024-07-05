@@ -14,7 +14,7 @@ from dash import html
 ramp_control = RampControl(365, '2018-01-01')
 
 #dat_output = ramp_control.run_opti_mg_dat(input_dict, admin_input)
-input_dic = process_survey(surv_id="atiMZ5E4jaZHv37TUekb6N", token="ea290627972a055fd067e1efc02c803869b1747c",DUMP=True)
+input_dic = process_survey(surv_id="affG8Fq5Suc99Sg9UB5hPv", token="ea290627972a055fd067e1efc02c803869b1747c",DUMP=True)
 
 dat_output = ramp_control.run_opti_mg_dat(input_dic, admin_input)
 # %% Plot raw output

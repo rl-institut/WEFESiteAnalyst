@@ -40,7 +40,7 @@ class FormParser():
 			self.output_dict['working_days'] = self.read_working_days(self.prefix['working_days'])
 			self.output_dict["appliances"] = self.create_elec_appliance_demand(self.prefix['electric'])
 			self.output_dict["cooking_demands"] = self.create_cooking_demand(self.prefix['cooking'],self.prefix['meal'])
-			self.output_dict["drinking_water_demand"] = self.create_drinking_water_demand(self.prefix['driking_water'])
+			self.output_dict["drinking_water_demand"] = self.create_drinking_water_demand(self.prefix['drinking_water'])
 			self.output_dict["service_water_demands"] = self.create_service_water_demand(self.prefix['service_water'])
 			
 			if self.prefix['agro_machine'] is None:
@@ -51,7 +51,7 @@ class FormParser():
 			raise BaseException("Please init the parser with giving a form before creating the dictionary")
 	
 	def check_form_type(self):
-	    for form_t in ["business", "service", "agroprocessing", "local_aut"]:
+	    for form_t in ["business", "service", "large_scale_farm", "local_aut"]:
 	        if f"G_0/respondent_{form_t}" in self.form.keys() and self.form[f"G_0/respondent_{form_t}"] == "yes":
 	            self.formtype = form_t
 	    if self.formtype is None:
@@ -425,7 +425,7 @@ class FormParser():
 
 if __name__ == "__main__":
 
-    forms = utils.get_survey(survey_id="atiMZ5E4jaZHv37TUekb6N")
+    forms = utils.get_survey(survey_id="affG8Fq5Suc99Sg9UB5hPv")
     formparser = FormParser(forms[3])
     formparser.create_dictionary()
 
