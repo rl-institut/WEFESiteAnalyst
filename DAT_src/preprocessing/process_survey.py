@@ -15,7 +15,7 @@ def pick_last_form_number(mydict, formtype):
 
 	return n
 
-def process_survey(DUMP=False, surv_id="atiMZ5E4jaZHv37TUekb6N", token="ea290627972a055fd067e1efc02c803869b1747c"):
+def process_survey(DUMP=False, surv_id="affG8Fq5Suc99Sg9UB5hPv", token="ea290627972a055fd067e1efc02c803869b1747c"):
 	forms = get_survey(survey_id=surv_id, api_t=token)
 	parser = FormParser()
 
@@ -34,7 +34,7 @@ def process_survey(DUMP=False, surv_id="atiMZ5E4jaZHv37TUekb6N", token="ea290627
 		elif parser.formtype == "service":
 			s_count += 1
 			form_name = f"{parser.formtype}_{s_count}"
-		elif parser.formtype == "agroprocessing":
+		elif parser.formtype == "large_scale_farm":
 			a_count += 1
 			form_name = f"{parser.formtype}_{a_count}"
 

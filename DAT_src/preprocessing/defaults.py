@@ -105,14 +105,14 @@ fuel_units_conversion = {"kilogram":1, "bag":None, "liter":None, "cylinder": Non
 time_units_conversion = {"daily":1, "weekly":7, "monthly":30}
 
 
-suffix = {"household": "_H","service": "_S","agroprocessing": "_AP","business": "","local_aut": ""}
+suffix = {"household": "_H","service": "_S","large_scale_farm": "_AP","business": "","local_aut": ""}
 prefix = {"household":
             {
              "working_days": None,
              "cooking": "H_18", 
              "meal":"H_18l",
              "electric":"H_16",
-             "driking_water":"H_8",
+             "drinking_water":"H_8",
              "service_water":
                  {
                  "animal_water":"H_11",
@@ -126,17 +126,17 @@ prefix = {"household":
              "cooking": "S_5",
              "meal": "S_5l",
              "electric": "S_3",
-             "driking_water": "S_4",
+             "drinking_water": "S_4",
              "service_water": "S_4",
              "agro_machine":None
              },
-          "agroprocessing":
+          "large_scale_farm":
             {
              "working_days": "AP_2c",
              "cooking": "AP_9",  
              "meal": "AP_9l", 
              "electric": "AP_8", 
-             "driking_water": "AP_3",
+             "drinking_water": "AP_3",
              "service_water":
                  {  
                  "animal_water": "AP_6", 
@@ -150,7 +150,7 @@ prefix = {"household":
              "cooking": "B_13",  
              "meal": "B_13_meal", 
              "electric": "B_11", 
-             "driking_water": "B_7",  
+             "drinking_water": "B_7",
              "service_water": "B_7",
              "agro_machine": "B_14"
              },
