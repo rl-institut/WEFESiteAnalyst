@@ -13,7 +13,7 @@ pio.renderers.default = "browser"
 
 
 def plotly_df(figure, df, subplot_col=1, subplot_row=1, legend=None, legendgroup=None, showlegend=True, mode='lines', linestyle={}, color_palette=None, stackgroup=None, markerstyle=None, opacity=1, yaxis='y',
-              prefix=None):
+              prefix=""):
     """
     Plot every column of a passed dataframe into the passed plotly figure.
 
@@ -72,10 +72,15 @@ def plotly_df(figure, df, subplot_col=1, subplot_row=1, legend=None, legendgroup
             if color_palette:
                 linestyle['color'] = color_palette[i]
 
+            if prefix != "":
+                name = prefix+' : '.join(column_name)
+            else:
+                name = column_name
+
             figure = figure.add_trace(go.Scatter(
                 x=col.index,
                 y=col,
-                name=' : '.join(column_name),  # use df column_name as name for trace (displayed in legend), join tuples of multi-level columns
+                name=name,  # use df column_name as name for trace (displayed in legend), join tuples of multi-level columns
                 opacity=opacity,
                 line=linestyle,
                 mode=mode,
@@ -134,16 +139,17 @@ def plotly_high_res_df(figure, df, subplot_col=1, subplot_row=1, legend=None, le
 
         i = 0
         for column_name, col in df.items():
-            figure = figure.add_trace(go.Scattergl(
-                name=prefix+legend[i],
-                opacity=opacity,
-                line=linestyle,
-                mode=mode,
-                marker=markerstyle,
-                yaxis=yaxis,
-                legendgroup=legendgroup,
-                showlegend=showlegend
-            ),
+            figure = figure.add_trace(
+                go.Scattergl(
+                    name=prefix+legend[i],
+                    opacity=opacity,
+                    line=linestyle,
+                    mode=mode,
+                    marker=markerstyle,
+                    yaxis=yaxis,
+                    legendgroup=legendgroup,
+                    showlegend=showlegend
+                ),
                 hf_x=col.index,
                 hf_y=col,
                 row=subplot_row,
@@ -152,8 +158,15 @@ def plotly_high_res_df(figure, df, subplot_col=1, subplot_row=1, legend=None, le
             i = i + 1
     else:  # no legend passed
         for column_name, col in df.items():
+            if prefix != "":
+                name = prefix+' : '.join(column_name)
+            elif isinstance(column_name, str):
+                name = column_name
+            else:
+                name = ' : '.join(column_name)
+
             figure = figure.add_trace(go.Scattergl(
-                name=prefix+' : '.join(column_name),  # use df column_name as name for trace (displayed in legend)
+                name=name,  # use df column_name as name for trace (displayed in legend)
                 opacity=opacity,
                 line=linestyle,
                 mode=mode,

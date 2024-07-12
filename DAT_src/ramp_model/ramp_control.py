@@ -2,10 +2,9 @@ import ramp
 import pandas as pd
 import numpy as np
 import copy
-from time import perf_counter
 from tqdm import tqdm
 
-from exceptions import MissingInput
+from helpers.exceptions import MissingInput
 
 
 class RampControl:
@@ -17,6 +16,47 @@ class RampControl:
         self.number_of_days = number_of_days
         self.min_timeseries = pd.date_range(start_date, periods=number_of_days * 24 * 60, freq="Min")
         self.days_timeseries = pd.date_range(start_date, periods=number_of_days, freq="D")
+        self.opti_mg_uses_cases = {}
+
+    def run_opti_mg_dat(self, input_data_dict, admin_input):
+        """
+        --- Performs modeling of all demands in OptiMG DAT ---
+        - Generate UseCases for the 5 demands to be modeled from input data generated from surveys
+        - Run RAMP model for all UseCases
+        - Resample demand profiles to hourly resolution
+        - Return multi-index dataframe with all modeled demands
+
+        :param input_data_dict:
+        :param admin_input:
+        :return:
+        """
+
+        # Generate dict of use_cases with entry for each demand
+        self.opti_mg_uses_cases = {
+            "electrical_appliances": self.generate_electric_appliances_use_cases(input_data_dict, admin_input),
+            "agro_processing": self.generate_agro_processing_use_cases(input_data_dict, admin_input),
+            "cooking": self.generate_cooking_demand_use_cases(input_data_dict, admin_input),
+            "drinking_water": self.generate_drinking_water_use_cases(input_data_dict, admin_input),
+            "service_water": self.generate_service_water_use_cases(input_data_dict, admin_input),
+        }
+
+        demand_profiles = {}
+        # Run RAMP model for each demand
+        for demand_name, use_cases in self.opti_mg_uses_cases.items():
+            demand_profiles[demand_name] = self.run_use_cases(use_cases, input_data_dict, demand_name)
+
+            # Resample to hourly values
+            if demand_name == "service_water" or demand_name == "drinking_water":
+                # Water demands are resampled as hourly sum
+                demand_profiles[demand_name] = demand_profiles[demand_name].resample('h').sum()
+            else:
+                # Energy demands are resampled as hourly mean
+                demand_profiles[demand_name] = demand_profiles[demand_name].resample('h').mean()
+
+        # Combine all demand profiles in multi-index dataframe
+        demand_profiles_df = pd.concat(demand_profiles, axis=1)
+
+        return demand_profiles_df
 
     def run_use_cases(self, use_cases_list, user_data, description):
         """
@@ -32,7 +72,7 @@ class RampControl:
 
         # Day of year counter
         day_counter = 0
-        for entry in tqdm(use_cases_list, desc=description):
+        for entry in tqdm(use_cases_list, desc=f'Modeling demands: {description}'):
 
             use_case = entry[0]  # use_case object is first entry in tuple in use_cases_list
             use_case_month = entry[1]  # month number of the use_case is second entry
@@ -102,6 +142,7 @@ class RampControl:
         df['datetime'] = self.min_timeseries
         df.set_index('datetime', drop=True, inplace=True)
         return df
+
 
     def generate_cooking_demand_use_cases(self, cooking_input_data, admin_input):
         """
@@ -318,7 +359,7 @@ class RampControl:
 
                     # Calculate machine's mechanical power
                     mech_power = int((1 / appliance_data['crop_processed_per_fuel']) * fuel_data['energy_content'] *
-                                  appliance_data['throughput']*1000)
+                                     appliance_data['throughput']*1000)
 
                     # Calculate machine's daily usage time (=func_time)
                     func_time = int((appliance_data['crop_processed_per_day'][month] / appliance_data['throughput']) *
@@ -372,7 +413,7 @@ class RampControl:
 
         return agro_processing_use_cases_list
 
-    def generate_drinking_water_use_cases(self, input_data):
+    def generate_drinking_water_use_cases(self, input_data, admin_input):
 
         # List for every month's use case
         drinking_water_use_cases_list = []
