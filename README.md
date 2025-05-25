@@ -1,7 +1,7 @@
 # WEFESiteAnalyst
 automatized remote data collection tool for the site-tailored planning of integrated Water-Energy-Food-Environment Systems (iWEFEs).
 
-The purpose of the tool is the automation of location-specific data collection for site-tailored planning and configuration of iWEFEs. The input to the WEFE Site Analyst are coordinates of the location to be analysed (point-based). Together with OWEFE and the iWEFE configurator, the WEFE Site Analyst contributes to the doctoral project "Facilitating the Planning of Integrated Water-Energy-Food-Environment Systems through Open Source Software".
+The purpose of the tool is the automation of location-specific data collection for site-tailored planning and configuration of iWEFEs. The input to the WEFE Site Analyst are coordinates of the location to be analysed (point-based). Together with OWEFE, WEFEDemand and the WEFEconfigurator, the WEFESiteAnalyst contributes to the reserach project "OptiMG" and the doctoral project "Facilitating the Planning of Integrated Water-Energy-Food-Environment Systems through Open Source Software".
 
 This repository is generated from rli_template. More information see below. 
 
