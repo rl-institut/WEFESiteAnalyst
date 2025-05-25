@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the following metadata."
+authors:
+  - given-names: "Julian"
+    family-names: "Fleischmann"
+  - given-names: "Silvia"
+    family-names: "Corrigliano"
+  - given names: "Vivek Harshvardhan"
+    familiy names: "Rana"
+title: "WEFESiteAnalyst"
+about "Automated collection and analysis of open datasets for the site-tailored planning of integrated Water-Energy-Food-Environment systems (iWEFEs)."
+repository-code: "https://github.com/rl-institut/WEFESiteAnalyst"
+version: "0.2.0"
+date-released: "2023-01-09"
+doi: "https://doi.org/10.1016/j.nexus.2023.100259"
+license: "AGPL-3.0"
